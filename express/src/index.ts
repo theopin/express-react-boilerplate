@@ -12,6 +12,7 @@ const port = process.env.PORT ?? 4000
 const database: Database = new MongoDb({ num: 'number' }, 'Tank')
 
 database.connect()
+app.set('database', database)
 
 app.use(cors()) // config cors so that front-end can use
 app.options('*', cors())

@@ -4,12 +4,12 @@ import mongoose from 'mongoose'
 const newDocumentConfig = { new: true }
 
 class MongoDb implements Database {
-  schema: mongoose.Schema
-  ModelObject: any
+  static schema: mongoose.Schema
+  static ModelObject: any
 
   constructor (schemaLayout: any, modelName: string) {
-    this.schema = new mongoose.Schema(schemaLayout)
-    this.ModelObject = mongoose.model(modelName, this.schema)
+    MongoDb.schema = new mongoose.Schema(schemaLayout)
+    MongoDb.ModelObject = mongoose.model(modelName, MongoDb.schema)
   }
 
   async connect (): Promise<void> {
@@ -30,24 +30,24 @@ class MongoDb implements Database {
   }
 
   async createEntity (data: any): Promise<any> {
-    const collection = new this.ModelObject(data)
+    const collection = new MongoDb.ModelObject(data)
     return collection.save()
   }
 
   async getOneEntity (id: string): Promise<any> {
-    return this.ModelObject.findOne({ id }).exec()
+    return MongoDb.ModelObject.findOne({ id }).exec()
   }
 
   async getAllEntities (params: Partial<any>): Promise<any> {
-    return this.ModelObject.find({ params }).exec()
+    return MongoDb.ModelObject.find({ params }).exec()
   }
 
   async updateEntity (id: string, newData: Partial<any>): Promise<any> {
-    return this.ModelObject.findOneAndUpdate({ id }, newData, newDocumentConfig).exec()
+    return MongoDb.ModelObject.findOneAndUpdate({ id }, newData, newDocumentConfig).exec()
   }
 
   async deleteEntity (id: string): Promise<any> {
-    return this.ModelObject.deleteOne({ id })
+    return MongoDb.ModelObject.deleteOne({ id })
   }
 }
 

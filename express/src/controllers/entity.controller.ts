@@ -34,8 +34,9 @@ class EntityController {
 
   createNewEntity (req: Request, res: Response, next: NextFunction): void {
     const { username } = req.params
+    const database = req.app.get('database')
     entityServiceObject
-      .createNewEntity(username)
+      .createNewEntity(database, username)
       .then((createResult) => {
         res.status(StatusCode.SuccessOK).json({
           status: true,
@@ -58,8 +59,10 @@ class EntityController {
 
   getEntityById (req: Request, res: Response, next: NextFunction): void {
     const { username } = req.params
+    const database = req.app.get('database')
+
     entityServiceObject
-      .getEntityById(username)
+      .getEntityById(database, username)
       .then((createResult) => {
         res.status(StatusCode.SuccessOK).json({
           status: true,
@@ -82,8 +85,10 @@ class EntityController {
 
   getAllEntities (req: Request, res: Response, next: NextFunction): void {
     const { username } = req.params
+    const database = req.app.get('database')
+
     entityServiceObject
-      .getAllEntities(username)
+      .getAllEntities(database, username)
       .then((createResult) => {
         res.status(StatusCode.SuccessOK).json({
           status: true,
@@ -106,8 +111,10 @@ class EntityController {
 
   updateEntityById (req: Request, res: Response, next: NextFunction): void {
     const { username, newData } = req.params
+    const database = req.app.get('database')
+
     entityServiceObject
-      .updateEntityById(username, newData)
+      .updateEntityById(database, username, newData)
       .then((createResult) => {
         res.status(StatusCode.SuccessOK).json({
           status: true,
@@ -130,8 +137,10 @@ class EntityController {
 
   deleteEntityById (req: Request, res: Response, next: NextFunction): void {
     const { username } = req.params
+    const database = req.app.get('database')
+
     entityServiceObject
-      .deleteEntityById(username)
+      .deleteEntityById(database, username)
       .then((createResult) => {
         res.status(StatusCode.SuccessOK).json({
           status: true,

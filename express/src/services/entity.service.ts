@@ -1,25 +1,23 @@
 // import db
+import type Database from '../database/interface/database.interface'
 
 class EntityService {
-  async createNewEntity (params: any): Promise<any> {
+  async createNewEntity (database: Database, params: any): Promise<any> {
     // run db request
-    console.log('Creating new Entity', params)
-    return {
-      uuid: 1,
-      name: 'Create'
-    }
+    console.log('Creating new Entity', params, database)
+    return database.createEntity(params)
   }
 
-  async getEntityById (id: string): Promise<any> {
+  async getEntityById (database: Database, id: string): Promise<any> {
     // run db request
-    console.log('Fetching entity with id', id)
+    console.log('Fetching entity with id', id, database)
     return {
       uuid: 1,
       name: 'GetOne'
     }
   }
 
-  async getAllEntities (params: any): Promise<any> {
+  async getAllEntities (database: Database, params: any): Promise<any> {
     // run db request
     console.log('Getting all Entities with params', params)
     return {
@@ -28,7 +26,7 @@ class EntityService {
     }
   }
 
-  async updateEntityById (id: any, params: any): Promise<any> {
+  async updateEntityById (database: Database, id: any, params: any): Promise<any> {
     // run db request
     console.log('Updating following Entity with params', id, params)
     return {
@@ -37,7 +35,7 @@ class EntityService {
     }
   }
 
-  async deleteEntityById (id: string): Promise<any> {
+  async deleteEntityById (database: Database, id: string): Promise<any> {
     // run db request
     console.log('Deleting entity with id', id)
     return {
