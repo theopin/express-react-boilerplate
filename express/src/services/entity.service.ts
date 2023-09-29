@@ -5,52 +5,36 @@ class EntityService {
   async createNewEntity (database: Database, params: any): Promise<any> {
     // run db request
     console.log('Creating new Entity', params, database)
-    // return database.createEntity(params)
-    return {
-      uuid: 1,
-      name: 'GetOne'
-    }
+    const createResult = await database.createEntity(params)
+    return createResult
   }
 
   async getEntityById (database: Database, id: string): Promise<any> {
     // run db request
     console.log('Fetching entity with id', id, database)
-    // return database.getOneEntity(id)
-    return {
-      uuid: 1,
-      name: 'GetOne'
-    }
+    const getOneResult = await database.getOneEntity(id)
+    return getOneResult
   }
 
   async getAllEntities (database: Database, params: any): Promise<any> {
     // run db request
     console.log('Getting all Entities with params', params)
-    // return database.getAllEntities(params)
-    return {
-      uuid: 1,
-      name: 'GetAll'
-    }
+    const getAllResult = await database.getAllEntities(params)
+    return getAllResult
   }
 
   async updateEntityById (database: Database, id: any, params: any): Promise<any> {
     // run db request
     console.log('Updating following Entity with params', id, params)
-    // return database.updateEntity(id, params)
-
-    return {
-      uuid: 1,
-      name: 'Update'
-    }
+    const updateResult = await database.updateEntity(id, params)
+    return updateResult
   }
 
   async deleteEntityById (database: Database, id: string): Promise<any> {
     // run db request
     console.log('Deleting entity with id', id)
-    // return database.deleteEntity(id)
-    return {
-      uuid: 1,
-      name: 'Delete'
-    }
+    const deleteResult = await database.deleteEntity(id)
+    return deleteResult
   }
 }
 
