@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 
 const newDocumentConfig = { new: true }
 
-class Mongoose implements Database {
+class MongoDb implements Database {
   constructor (schemaLayout: any, modelName: string) {
     this.schema = new mongoose.Schema(schemaLayout)
     this.ModelObject = mongoose.model(modelName, this.schema)
@@ -14,6 +14,15 @@ class Mongoose implements Database {
 
   async connect (): Promise<void> {
     await mongoose.connect('mongodb://127.0.0.1:27017/test')
+
+    mongoose.connection.on('connected', () => {
+      console.log('Connected to MongoDB database successfully!')
+    })
+
+    mongoose.connection.on('error', (err) => {
+      console.error(err)
+      throw new Error('Failed to connect to MongoDB database!')
+    })
   }
 
   async disconnect (): Promise<void> {
@@ -42,4 +51,4 @@ class Mongoose implements Database {
   }
 }
 
-export default Mongoose
+export default MongoDb
