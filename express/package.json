@@ -1,12 +1,13 @@
 {
-  "name": "express-react-boilerplate",
+  "name": "express-boilerplate",
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
   "scripts": {
     "build": "npx tsc",
-    "start": "node dist/index.js",
+    "start": "npx tsc && node dist/index.js",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
+    "postman": "npx tsc && node dist/postman/postman.generator.js",
     "lint": "eslint --ext .ts  .",
     "lint-fix": "eslint --fix .  --ext .ts"
   },
@@ -17,10 +18,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "mongoose": "^7.5.3",
-    "status-code-enum": "^1.0.0",
-    "swagger-autogen": "^2.23.6",
-    "swagger-ui-express": "^5.0.0"
+    "mongoose": "^7.5.3"
   },
   "devDependencies": {
     "@types/cors": "^2.8.14",
