@@ -3,7 +3,7 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 
 import EntityRouter from './routes/entity.route'
-import { entitySchema, entityModelName } from '../src/models/entity.model'
+import { entitySchema, entityModelName } from './models/entity.model'
 
 import type Database from './database/interface/database.interface'
 import MongoDb from './database/mongodb/mongodb'

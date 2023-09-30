@@ -111,7 +111,6 @@ class EntityController {
     entityServiceObject
       .updateEntityById(database, username, newData)
       .then((updateResult) => {
-        console.log(updateResult)
         res.status(StatusCode.SuccessOK).json({
           status: true,
           data: updateResult
