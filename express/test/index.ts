@@ -1,23 +1,20 @@
 import express, { type Express } from 'express'
-import dotenv from 'dotenv'
 
 import EntityRouter from '../src/routes/entity.route'
-// import EntityRouter from './routes/entity.route'
+import { entitySchema, entityModelName } from '../src/models/entity.model'
 
-// import type Database from './database/interface/database.interface'
-// import MongoDb from './database/mongodb/mongodb'
-
-dotenv.config()
+import type Database from '../src/database/interface/database.interface'
+import MongoDb from '../src/database/mongodb/mongodb'
 
 export const app: Express = express()
 
-// const database: Database = new MongoDb({ num: 'number' }, 'Tank')
+const database: Database = new MongoDb(entitySchema, entityModelName)
 
-// database.connect()
-//   .catch((error) => {
-//     console.log(error)
-//   })
-// app.set('database', database)
+database.connect()
+  .catch((error) => {
+    console.log(error)
+  })
+app.set('database', database)
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))

@@ -33,16 +33,14 @@ class EntityController {
   }
 
   createNewEntity (req: Request, res: Response, next: NextFunction): void {
-    const { username } = req.params
+    const body = req.body
     const database = req.app.get('database')
     entityServiceObject
-      .createNewEntity(database, username)
+      .createNewEntity(database, body)
       .then((createResult) => {
-        res.status(StatusCode.SuccessOK).json({
+        res.status(StatusCode.SuccessCreated).json({
           status: true,
-          data: {
-            createResult
-          }
+          data: createResult
         })
       })
       .catch((errorObject: any) => {
@@ -63,12 +61,10 @@ class EntityController {
 
     entityServiceObject
       .getEntityById(database, username)
-      .then((createResult) => {
+      .then((getResult) => {
         res.status(StatusCode.SuccessOK).json({
           status: true,
-          data: {
-            createResult
-          }
+          data: getResult
         })
       })
       .catch((errorObject: any) => {
@@ -89,12 +85,10 @@ class EntityController {
 
     entityServiceObject
       .getAllEntities(database, username)
-      .then((createResult) => {
+      .then((getAllResult) => {
         res.status(StatusCode.SuccessOK).json({
           status: true,
-          data: {
-            createResult
-          }
+          data: getAllResult
         })
       })
       .catch((errorObject: any) => {
@@ -110,17 +104,17 @@ class EntityController {
   }
 
   updateEntityById (req: Request, res: Response, next: NextFunction): void {
-    const { username, newData } = req.params
+    const newData = req.body
+    const { username } = req.params
     const database = req.app.get('database')
 
     entityServiceObject
       .updateEntityById(database, username, newData)
-      .then((createResult) => {
+      .then((updateResult) => {
+        console.log(updateResult)
         res.status(StatusCode.SuccessOK).json({
           status: true,
-          data: {
-            createResult
-          }
+          data: updateResult
         })
       })
       .catch((errorObject: any) => {
@@ -141,12 +135,10 @@ class EntityController {
 
     entityServiceObject
       .deleteEntityById(database, username)
-      .then((createResult) => {
+      .then((deleteResult) => {
         res.status(StatusCode.SuccessOK).json({
           status: true,
-          data: {
-            createResult
-          }
+          data: deleteResult
         })
       })
       .catch((errorObject: any) => {
