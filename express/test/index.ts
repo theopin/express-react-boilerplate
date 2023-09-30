@@ -10,7 +10,6 @@ import EntityRouter from '../src/routes/entity.route'
 dotenv.config()
 
 export const app: Express = express()
-const port = process.env.TEST_PORT ?? 4010
 
 // const database: Database = new MongoDb({ num: 'number' }, 'Tank')
 
@@ -24,4 +23,3 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 app.use('/api', EntityRouter)
-
