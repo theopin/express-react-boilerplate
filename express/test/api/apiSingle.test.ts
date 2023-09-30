@@ -42,8 +42,9 @@ afterEach(async () => {
   await ModelObject.deleteMany({})
 })
 
-afterAll((done) => {
-  server.close(done)
+afterAll(async () => {
+  await mongoose.disconnect()
+  server.close()
 })
 
 describe('GET /api/health', () => {
@@ -61,7 +62,7 @@ describe('POST /api/', () => {
       .post('/api/')
       .send(Entities[1])
 
-    expect(res.statusCode).toEqual(StatusCode.SuccessAccepted)
+    expect(res.statusCode).toEqual(StatusCode.SuccessCreated)
   })
 })
 
