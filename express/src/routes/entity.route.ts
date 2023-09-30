@@ -4,7 +4,6 @@ import EntityController from '../controllers/entity.controller'
 const EntityRouter = Router()
 const entityControllerObject = new EntityController()
 
-// Get api status
 EntityRouter.get('/health', entityControllerObject.getHealthStatus)
 
 // Create new app Entity
