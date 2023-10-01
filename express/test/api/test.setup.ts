@@ -17,10 +17,10 @@ const beforeAllFunction = beforeAll(() => {
 })
 
 const beforeEachFunction = beforeEach(async () => {
-  const collection = new ModelObject(SampleEntities[0])
+  const modelInstances = SampleEntities.map(data => new ModelObject(data))
 
-  const saveResult = await collection.save()
-  defaultEntityId = saveResult._id
+  const saveResult = await ModelObject.insertMany(modelInstances)
+  defaultEntityId = saveResult[0]._id
 })
 
 const afterEachFunction = afterEach(async () => {

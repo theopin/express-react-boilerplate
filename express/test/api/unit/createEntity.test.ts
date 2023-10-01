@@ -3,13 +3,20 @@ import { StatusCode } from 'status-code-enum'
 
 import * as TestSetup from '../test.setup'
 
-describe('PATCH /api/:id', () => {
-  test('returns status code 200 if it accepts a given entity with appropriate id and details', async () => {
+describe('POST /api/', () => {
+  test('returns status code 201 if it accepts a given entity with appropriate details', async () => {
     const res: any = await request(TestSetup.app)
-      .patch(`/api/${TestSetup.defaultEntityId}`)
-      .send({ password: '654321' })
+      .post('/api/')
+      .send({ email: 'test@testing.com', username: 'tom', password: 'jerry' })
 
-    // check data @ res.body
-    expect(res.statusCode).toEqual(StatusCode.SuccessOK)
+    expect(res.statusCode).toEqual(StatusCode.SuccessCreated)
+  })
+
+  test('returns a data of a created object', async () => {
+    const res: any = await request(TestSetup.app)
+      .post('/api/')
+      .send({ email: 'test@testing.com', username: 'tom', password: 'jerry' })
+
+    expect(res.body.data._id).toBeDefined()
   })
 })
