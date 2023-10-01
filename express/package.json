@@ -8,7 +8,7 @@
     "start": "npx tsc && node dist/src/index.js",
     "dev": "npx tsc --watch & nodemon dist/src/index.js",
     "test": "jest",
-    "postman": "npx tsc && node dist/postman/postman.generator.js",
+    "postman": "ts-node postman/postman.generator.ts",
     "lint": "eslint --ext .ts  .",
     "lint-fix": "eslint --fix . --ext .ts"
   },

@@ -10,20 +10,21 @@ async function generateApiEndpoints (): Promise<any> {
   const endpoints: Array<{ name: string, request: { method: string, url: string } }> = []
 
   // Define the base directory for route files
-  const routesDirectory = path.join(__dirname, '..', 'routes')
+  const routesDirectory = path.join(__dirname, '..', 'src', 'routes')
 
   // Read each component's route file dynamically
   const componentFolders = fs.readdirSync(routesDirectory)
   for (const componentFolder of componentFolders) {
     const routeFile = path.join(routesDirectory, componentFolder)
+    console.log(routeFile)
 
     // Check if the route file exists
     if (fs.existsSync(routeFile)) {
-      const componentRoutes = (await import(routeFile)).default
+      const componentRoutes = (await import(routeFile))
       const routerStack = componentRoutes.default._router.stack
 
       routerStack.forEach((layer: any) => {
-        if (layer.route !== null) {
+        if (layer.route !== null && layer.route !== undefined) {
           const route = layer.route
           const endpoint = {
             name: `${layer.route.stack[0].method} ${componentFolder.split('.')[0]}`,
@@ -46,7 +47,7 @@ async function generateApiEndpoints (): Promise<any> {
 
 generateApiEndpoints()
   .then((apiEndPoints) => {
-    const jsonFilePath = path.join(__dirname, '..', '..', 'src', 'postman', 'postman.collection.json')
+    const jsonFilePath = path.join(__dirname, '..', 'postman', 'postman.collection.json')
     fs.writeFileSync(jsonFilePath, JSON.stringify(apiEndPoints, null, 2))
 
     console.log(`ApiEndpoints written to ${jsonFilePath}`)

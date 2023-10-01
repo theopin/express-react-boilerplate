@@ -1,9 +1,7 @@
 {
-  "info": {
-    "name": "Entity API",
-    "description": "\r\nThis is the Entity API for the Express boilerplate application. \r\n\r\n",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-  },
+  "name": "Entity API",
+  "description": "\r\nThis is the Entity API for the Express boilerplate application. \r\n\r\n",
+  "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
   "items": [
     {
       "name": "get entity",
