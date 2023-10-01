@@ -22,9 +22,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Lint Codebase
-        run: npm run lint
-
       - name: Set up Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
@@ -41,3 +38,6 @@ jobs:
 
       - name: Run Unit & Integration Tests
         run: npm run test
+
+      - name: Lint Codebase
+        run: npm run lint
