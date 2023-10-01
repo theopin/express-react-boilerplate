@@ -34,20 +34,20 @@ class MongoDb implements Database {
     return collection.save()
   }
 
-  async getOneEntity (id: string): Promise<any> {
-    return MongoDb.ModelObject.findOne({ id }).exec()
+  async getOneEntity (_id: string): Promise<any> {
+    return MongoDb.ModelObject.findOne({ _id }).exec()
   }
 
   async getAllEntities (params: Partial<any>): Promise<any> {
     return MongoDb.ModelObject.find({ params }).exec()
   }
 
-  async updateEntity (id: string, newData: Partial<any>): Promise<any> {
-    return MongoDb.ModelObject.findOneAndUpdate({ id }, newData, newDocumentConfig).exec()
+  async updateEntity (_id: string, newData: Partial<any>): Promise<any> {
+    return MongoDb.ModelObject.findOneAndUpdate({ _id }, newData, newDocumentConfig).exec()
   }
 
-  async deleteEntity (id: string): Promise<any> {
-    return MongoDb.ModelObject.deleteOne({ id })
+  async deleteEntity (_id: string): Promise<any> {
+    return MongoDb.ModelObject.deleteOne({ _id }).exec()
   }
 }
 

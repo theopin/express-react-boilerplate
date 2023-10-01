@@ -16,6 +16,7 @@ jobs:
     strategy:
         matrix:
           node-version: [16.x]
+          mongodb-version: ['5.0']
 
     steps:
       - name: Checkout code
@@ -28,6 +29,15 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.8.0
+        with:
+            mongodb-version: ${{ matrix.mongodb-version }}
+            mongodb-port: 27017
+
+      - name: Run Unit & Integration Tests
+        run: npm run test
 
       - name: Lint Codebase
         run: npm run lint
