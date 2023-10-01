@@ -10,4 +10,19 @@ describe('DELETE /api/:id', () => {
 
     expect(res.statusCode).toEqual(StatusCode.SuccessOK)
   })
+
+  test('returns status code 500 if it deletes a non-existent entity id', async () => {
+    const nonExistentId = '4d245ddwdwwdw'
+    const res: any = await request(TestSetup.app)
+      .delete(`/api/${nonExistentId}`)
+
+    expect(res.statusCode).toEqual(StatusCode.ServerErrorInternal)
+  })
+
+  test('throws error message if it deletes a non-existent entity id', async () => {
+    const nonExistentId = '4d245ddwdwwdw'
+    const res: any = await request(TestSetup.app)
+      .delete(`/api/${nonExistentId}`)
+    expect(res.body.status).toEqual(false)
+  })
 })

@@ -9,7 +9,7 @@
     "prod": "node build/index.js",
     "start": "npx tsc && node dist/src/index.js",
     "dev": "npx tsc --watch & nodemon dist/src/index.js",
-    "test": "jest --runInBand --silent --detectOpenHandles --coverage",
+    "test": "jest --runInBand --detectOpenHandles --silent --verbose",
     "postman": "ts-node postman/postman.generator.ts",
     "lint": "eslint --ext .ts  .",
     "lint-fix": "eslint --fix . --ext .ts"

@@ -56,11 +56,11 @@ class EntityController {
   }
 
   getEntityById (req: Request, res: Response, next: NextFunction): void {
-    const { username } = req.params
+    const { id } = req.params
     const database = req.app.get('database')
 
     entityServiceObject
-      .getEntityById(database, username)
+      .getEntityById(database, id)
       .then((getResult) => {
         res.status(StatusCode.SuccessOK).json({
           status: true,
@@ -80,11 +80,11 @@ class EntityController {
   }
 
   getAllEntities (req: Request, res: Response, next: NextFunction): void {
-    const { username } = req.params
+    const { params } = req.params
     const database = req.app.get('database')
 
     entityServiceObject
-      .getAllEntities(database, username)
+      .getAllEntities(database, params)
       .then((getAllResult) => {
         res.status(StatusCode.SuccessOK).json({
           status: true,
@@ -105,11 +105,11 @@ class EntityController {
 
   updateEntityById (req: Request, res: Response, next: NextFunction): void {
     const newData = req.body
-    const { username } = req.params
+    const { id } = req.params
     const database = req.app.get('database')
 
     entityServiceObject
-      .updateEntityById(database, username, newData)
+      .updateEntityById(database, id, newData)
       .then((updateResult) => {
         res.status(StatusCode.SuccessOK).json({
           status: true,
@@ -129,11 +129,11 @@ class EntityController {
   }
 
   deleteEntityById (req: Request, res: Response, next: NextFunction): void {
-    const { username } = req.params
+    const { id } = req.params
     const database = req.app.get('database')
 
     entityServiceObject
-      .deleteEntityById(database, username)
+      .deleteEntityById(database, id)
       .then((deleteResult) => {
         res.status(StatusCode.SuccessOK).json({
           status: true,
