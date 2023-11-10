@@ -22,7 +22,7 @@ class MongoDb implements Database {
       throw new Error('Failed to connect to MongoDB database!')
     })
 
-    await mongoose.connect('mongodb://127.0.0.1:27017')
+    await mongoose.connect('mongodb://mongodb:27017')
   }
 
   async disconnect (): Promise<void> {
