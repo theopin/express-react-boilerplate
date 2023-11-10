@@ -6,7 +6,7 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
-RUN npm run build
+RUN npx tsc --build tsconfig.build.json
 
 # Stage 2: Run the application
 FROM node:16.0.0-alpine
