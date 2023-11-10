@@ -3,17 +3,16 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 
 import EntityRouter from './routes/entity.route'
-import { entitySchema, entityModelName } from './models/entity.model'
 
 import type Database from './database/interface/database.interface'
-import MongoDb from './database/mongodb/mongodb'
+import { createDatabaseObject } from './database/factory/databaseFactory'
 
 dotenv.config()
 
 const app: Express = express()
 const port = process.env.PORT ?? 4000
 
-const database: Database = new MongoDb(entitySchema, entityModelName)
+const database: Database = createDatabaseObject(Number(process.env.DATABASE_TYPE), String(process.env.DATABASE_CONNECTION_URL))
 
 database.connect()
   .catch((error) => {

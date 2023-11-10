@@ -1,14 +1,17 @@
 import express, { type Express } from 'express'
+import dotenv from 'dotenv'
 
 import EntityRouter from '../src/routes/entity.route'
-import { entitySchema, entityModelName } from '../src/models/entity.model'
+import { createDatabaseObject } from '../src/database/factory/databaseFactory'
 
 import type Database from '../src/database/interface/database.interface'
-import MongoDb from '../src/database/mongodb/mongodb'
 
 export const app: Express = express()
 
-const database: Database = new MongoDb(entitySchema, entityModelName)
+dotenv.config()
+
+const database: Database = createDatabaseObject(Number(process.env.DATABASE_TYPE), String(process.env.DATABASE_CONNECTION_URL))
+console.log(process.env.DATABASE_CONNECTION_URL)
 
 database.connect()
   .catch((error) => {

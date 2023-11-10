@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "build": "npx tsc --build tsconfig.build.json",
+    "build": "npx tsc -- tsconfig.build.json",
     "dist": "npx tsc",
     "prod": "node build/index.js",
     "start": "npx tsc && node dist/src/index.js",
