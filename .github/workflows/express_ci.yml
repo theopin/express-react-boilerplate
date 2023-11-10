@@ -1,10 +1,11 @@
-name: Continuous Integration Workflow
+name: Continuous Integration Workflow - Express
 on:
   pull_request:
     branches:
       - main # Run the workflow only on pull requests to the main branch
     paths:
-    - 'express/**' # Workflow triggered on changes to code within express directory
+      - 'express/**' # Workflow triggered on changes to code within express directory
+      - '.github/workflows/express_ci.yml'
 
 jobs:
   test:
@@ -38,6 +39,9 @@ jobs:
 
       - name: Run Unit & Integration Tests
         run: npm run test
+        env:
+          DATABASE_TYPE: ${{ secrets.DATABASE_TYPE }}
+          DATABASE_CONNECTION_URL: ${{ secrets.DATABASE_CONNECTION_URL }}
 
       - name: Lint Codebase
         run: npm run lint
