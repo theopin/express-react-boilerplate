@@ -1,5 +1,5 @@
 # Stage 1: Build the application
-FROM node:16.0.0-alpine as builder
+FROM node:17-alpine as builder
 WORKDIR /app
 
 COPY package*.json ./
@@ -9,7 +9,7 @@ COPY . .
 RUN npx tsc --build tsconfig.build.json
 
 # Stage 2: Run the application
-FROM node:16.0.0-alpine
+FROM node:17-alpine as executor
 WORKDIR /app
 
 COPY --from=builder /app/node_modules ./node_modules
