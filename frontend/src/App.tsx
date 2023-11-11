@@ -1,26 +1,13 @@
 import React from 'react'
-// import logo from './logo.svg'
-import './App.css'
+import 'bootstrap/dist/css/bootstrap.css'
+import { UserDetails } from './features/user/UserDetails'
 
-function App (): JSX.Element {
+export function App (): JSX.Element {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div>Hello to Boilerplate</div>
+      <UserDetails />
     </div>
+
   )
 }
-
-export default App
