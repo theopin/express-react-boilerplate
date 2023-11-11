@@ -1,17 +1,17 @@
-name: Continuous Deployment Workflow - Backend
+name: Continuous Deployment Workflow - Frontend
 on:
   push:
     branches:
       - main # Run the workflow only on push to the main branch
     paths:
-      - 'backend/**' # Workflow triggered on changes to code within express directory
-      - '.github/workflows/backend_cd.yml'
+      - 'frontend/**' # Workflow triggered on changes to code within express directory
+      - '.github/workflows/frontend_cd.yml'
 
 jobs:
   test:
     defaults:
         run:
-            working-directory: ./backend
+            working-directory: ./frontend
 
     runs-on: ubuntu-latest
     steps:
@@ -21,5 +21,5 @@ jobs:
       - name: Deploy to production
         uses: johnbeynon/render-deploy-action@v0.0.8
         with:
-          service-id: ${{ secrets.RENDER_SERVICE_ID }}
+          service-id: ${{ secrets.RENDER_SERVICE_ID_FRONTEND }}
           api-key: ${{ secrets.RENDER_API_KEY }}
