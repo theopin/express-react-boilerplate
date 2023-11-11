@@ -1,0 +1,25 @@
+name: Continuous Deployment Workflow - Frontend
+on:
+  push:
+    branches:
+      - main # Run the workflow only on push to the main branch
+    paths:
+      - 'frontend/**' # Workflow triggered on changes to code within express directory
+      - '.github/workflows/frontend_cd.yml'
+
+jobs:
+  test:
+    defaults:
+        run:
+            working-directory: ./frontend
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy to production
+        uses: johnbeynon/render-deploy-action@v0.0.8
+        with:
+          service-id: ${{ secrets.RENDER_SERVICE_ID_FRONTEND }}
+          api-key: ${{ secrets.RENDER_API_KEY }}

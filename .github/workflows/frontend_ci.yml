@@ -1,17 +1,17 @@
-name: Continuous Integration Workflow - Express
+name: Continuous Integration Workflow - Frontend
 on:
   pull_request:
     branches:
       - main # Run the workflow only on pull requests to the main branch
     paths:
-      - 'express/**' # Workflow triggered on changes to code within express directory
-      - '.github/workflows/express_ci.yml'
+      - 'frontend/**' # Workflow triggered on changes to code within express directory
+      - '.github/workflows/frontend_ci.yml'
 
 jobs:
   test:
     defaults:
         run:
-            working-directory: ./express
+            working-directory: ./frontend
 
     runs-on: ubuntu-latest
     strategy:
@@ -30,18 +30,6 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-
-      - name: Start MongoDB
-        uses: supercharge/mongodb-github-action@1.8.0
-        with:
-            mongodb-version: ${{ matrix.mongodb-version }}
-            mongodb-port: 27017
-
-      - name: Run Unit & Integration Tests
-        run: npm run test
-        env:
-          DATABASE_TYPE: ${{ secrets.DATABASE_TYPE }}
-          DATABASE_CONNECTION_URL: ${{ secrets.DATABASE_CONNECTION_URL }}
 
       - name: Lint Codebase
         run: npm run lint

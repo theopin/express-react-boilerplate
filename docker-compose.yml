@@ -7,10 +7,19 @@ services:
 
   backend-service:
     env_file:
-      - ./express/.env
+      - ./backend/.env
     container_name: backend-service
-    build: ./express
+    build: ./backend
     depends_on:
       - mongodb
     ports:
       - 4000:4000
+
+  
+  frontend-service:
+    env_file:
+      - ./frontend/.env
+    container_name: frontend-service
+    build: ./frontend
+    ports:
+      - 80:80

@@ -1,17 +1,17 @@
-name: Continuous Deployment Workflow - Express
+name: Continuous Deployment Workflow - Backend
 on:
   push:
     branches:
       - main # Run the workflow only on push to the main branch
     paths:
-      - 'express/**' # Workflow triggered on changes to code within express directory
-      - '.github/workflows/express_cd.yml'
+      - 'backend/**' # Workflow triggered on changes to code within express directory
+      - '.github/workflows/backend_cd.yml'
 
 jobs:
   test:
     defaults:
         run:
-            working-directory: ./express
+            working-directory: ./backend
 
     runs-on: ubuntu-latest
     steps:

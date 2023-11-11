@@ -1,5 +1,5 @@
 import { app } from '../index'
-import { SampleEntities } from './entities.sample'
+import { SampleEntities } from './data/entities.sample'
 
 import mongoose from 'mongoose'
 const port = 4010
