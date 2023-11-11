@@ -16,16 +16,16 @@ const getEntitiesByFilter = (filterParams: EntityFilter): Promise<any> => {
     })
 }
 
-const createNewEntity = (user: Entity): Promise<any> => {
-    return RequestTypes.postRequest('/', { body: user })
+const createNewEntity = (entityDetails: Entity): Promise<any> => {
+    return RequestTypes.postRequest('/', entityDetails)
 }
 
-const updateEntity = (articleId: number, user: Entity): Promise<any> => {
-    return RequestTypes.patchRequest(`//${articleId}`, { body: user })
+const updateEntityById = (id: string, updatedDetails: EntityFilter): Promise<any> => {
+    return RequestTypes.patchRequest(`/${id}`, updatedDetails)
 }
 
-const deleteEntityById = (articleId: number): Promise<any> => {
-    return RequestTypes.deleteRequest(`/${articleId}`)
+const deleteEntityById = (id: string): Promise<any> => {
+    return RequestTypes.deleteRequest(`/${id}`)
 }
 
 export const EntityRequestApi = {
@@ -33,6 +33,6 @@ export const EntityRequestApi = {
     getEntityById,
     getEntitiesByFilter,
     createNewEntity,
-    updateEntity,
+    updateEntityById,
     deleteEntityById,
 }

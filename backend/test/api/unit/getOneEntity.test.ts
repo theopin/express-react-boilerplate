@@ -2,7 +2,7 @@ import request from 'supertest'
 import { StatusCode } from 'status-code-enum'
 
 import * as TestSetup from '../test.setup'
-import { SampleEntities } from '../entities.sample'
+import { SampleEntities } from '../data/entities.sample'
 
 describe('GET /api/:id', () => {
   test('returns status code 200 if it gets a given entity id', async () => {
