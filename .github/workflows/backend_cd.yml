@@ -1,4 +1,4 @@
-name: Continuous Deployment Workflow - Express
+name: Continuous Deployment Workflow - Backend
 on:
   push:
     branches:
