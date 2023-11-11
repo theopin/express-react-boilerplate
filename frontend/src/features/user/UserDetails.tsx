@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { EntityRequestApi } from '../../api/entity/EntityRequest'
 import { type Entity } from '../../models/user/Entity'
+import { SuccessToast } from '../../components/toasts/success/SuccessToast'
 
 export function UserDetails (): JSX.Element {
   const [userDetails, setUserDetails] = useState<Entity | null>(null)
@@ -23,10 +24,13 @@ export function UserDetails (): JSX.Element {
   if (userDetails === null || userDetails === undefined) {
     return (<div>Error! User Not found</div>)
   }
+
   return (
-      <div>
-            <div>Username: {userDetails.username}</div>
-            <div>Email: {userDetails.email}</div>
-      </div>
+    <div>newFunction
+      <div>Username: {userDetails.username}</div>
+      <div>Email: {userDetails.email}</div>
+      <button type="button" className="btn btn-primary" id="liveToastBtn" onClick={SuccessToast.showLiveToast}>Show live toast</button>
+      <SuccessToast.Toast />
+    </div>
   )
 }
