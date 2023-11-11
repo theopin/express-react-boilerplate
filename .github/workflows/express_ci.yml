@@ -4,14 +4,14 @@ on:
     branches:
       - main # Run the workflow only on pull requests to the main branch
     paths:
-      - 'express/**' # Workflow triggered on changes to code within express directory
+      - 'backend/**' # Workflow triggered on changes to code within express directory
       - '.github/workflows/express_ci.yml'
 
 jobs:
   test:
     defaults:
         run:
-            working-directory: ./express
+            working-directory: ./backend
 
     runs-on: ubuntu-latest
     strategy:

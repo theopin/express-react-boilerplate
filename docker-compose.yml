@@ -7,9 +7,9 @@ services:
 
   backend-service:
     env_file:
-      - ./express/.env
+      - ./backend/.env
     container_name: backend-service
-    build: ./express
+    build: ./backend
     depends_on:
       - mongodb
     ports:
