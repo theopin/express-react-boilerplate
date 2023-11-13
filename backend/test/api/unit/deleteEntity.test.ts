@@ -3,10 +3,10 @@ import { StatusCode } from 'status-code-enum'
 
 import * as TestSetup from '../test.setup'
 
-describe('DELETE /api/:id', () => {
+describe('DELETE /:id', () => {
   test('returns status code 200 if it deletes a given entity id', async () => {
     const res: any = await request(TestSetup.app)
-      .delete(`/api/${TestSetup.defaultEntityId}`)
+      .delete(`/${TestSetup.defaultEntityId}`)
 
     expect(res.statusCode).toEqual(StatusCode.SuccessOK)
   })
@@ -14,7 +14,7 @@ describe('DELETE /api/:id', () => {
   test('returns status code 500 if it deletes a non-existent entity id', async () => {
     const nonExistentId = '4d245ddwdwwdw'
     const res: any = await request(TestSetup.app)
-      .delete(`/api/${nonExistentId}`)
+      .delete(`/${nonExistentId}`)
 
     expect(res.statusCode).toEqual(StatusCode.ServerErrorInternal)
   })
@@ -22,7 +22,7 @@ describe('DELETE /api/:id', () => {
   test('throws error message if it deletes a non-existent entity id', async () => {
     const nonExistentId = '4d245ddwdwwdw'
     const res: any = await request(TestSetup.app)
-      .delete(`/api/${nonExistentId}`)
+      .delete(`/${nonExistentId}`)
     expect(res.body.status).toEqual(false)
   })
 })
