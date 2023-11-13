@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
         matrix:
-          node-version: [17.x]
+          node-version: [18.x]
           mongodb-version: ['5.0']
 
     steps:
@@ -42,7 +42,7 @@ jobs:
         env:
           DATABASE_TYPE: ${{ secrets.DATABASE_TYPE }}
           DATABASE_CONNECTION_URL: ${{ secrets.DATABASE_CONNECTION_URL }}
-          
+
 
       - name: Lint Codebase
         run: npm run lint
