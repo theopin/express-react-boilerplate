@@ -12,11 +12,11 @@ describe('PATCH /:id', () => {
     expect(res.statusCode).toEqual(StatusCode.SuccessOK)
   })
 
-  test('returns object with updated password if updated successfully', async () => {
+  test('returns object with updated username if updated successfully', async () => {
     const res: any = await request(TestSetup.app)
       .patch(`/${TestSetup.defaultEntityId}`)
-      .send({ password: '654321' })
+      .send({ username: 'hello' })
 
-    expect(res.body.data.password).toEqual('654321')
+    expect(res.body.data.username).toEqual('hello')
   })
 })

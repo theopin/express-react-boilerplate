@@ -12,11 +12,19 @@ describe('POST /', () => {
     expect(res.statusCode).toEqual(StatusCode.SuccessCreated)
   })
 
-  test('returns a data of a created object', async () => {
+  test('returns a data of a user object', async () => {
     const res: any = await request(TestSetup.app)
       .post('/')
       .send({ email: 'test@testing.com', username: 'tom', password: 'jerry' })
 
     expect(res.body.data._id).toBeDefined()
+  })
+
+  test('returns a data of a user object', async () => {
+    const res: any = await request(TestSetup.app)
+      .post('/')
+      .send({ email: 'test@testing.com', username: 'tom', password: 'jerry' })
+
+    expect(res.body.data.password).not.toEqual('jerry')
   })
 })
