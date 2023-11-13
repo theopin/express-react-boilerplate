@@ -15,7 +15,7 @@ describe('PATCH /:id', () => {
   test('returns object with updated username if updated successfully', async () => {
     const res: any = await request(TestSetup.app)
       .patch(`/${TestSetup.defaultEntityId}`)
-      .send({ password: 'hello' })
+      .send({ username: 'hello' })
 
     expect(res.body.data.username).toEqual('hello')
   })

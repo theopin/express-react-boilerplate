@@ -2,7 +2,7 @@ import request from 'supertest'
 import { StatusCode } from 'status-code-enum'
 
 import * as TestSetup from '../test.setup'
-import { SampleEntities } from '../data/users.sample'
+import { SampleUsers } from '../data/users.sample'
 
 describe('GET /', () => {
   test('returns status code 200 if can fetch a list of existing user', async () => {
@@ -16,6 +16,6 @@ describe('GET /', () => {
     const res: any = await request(TestSetup.app)
       .get('/')
 
-    expect(res.body.data.length).toEqual(SampleEntities.length)
+    expect(res.body.data.length).toEqual(SampleUsers.length)
   })
 })

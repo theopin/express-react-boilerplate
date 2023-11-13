@@ -5,10 +5,14 @@ const SALT_ROUNDS = 10
 
 class UserService {
   async createNewUser (database: Database, params: any): Promise<any> {
-    const hashedPassword = await bcrypt.hash(params.password, SALT_ROUNDS)
-    params.password = hashedPassword
+    await this.hashPassword(params)
     const createResult = await database.createEntity(params)
     return createResult
+  }
+
+  private async hashPassword (params: any): Promise<any> {
+    const hashedPassword = await bcrypt.hash(params.password, SALT_ROUNDS)
+    params.password = hashedPassword
   }
 
   async getUserById (database: Database, id: string): Promise<any> {
@@ -22,9 +26,8 @@ class UserService {
   }
 
   async updateUserById (database: Database, id: any, params: any): Promise<any> {
-    if (params.password !== null || params.password !== undefined) {
-      const hashedPassword = await bcrypt.hash(params.password, SALT_ROUNDS)
-      params.password = hashedPassword
+    if (params.password !== null && params.password !== undefined) {
+      await this.hashPassword(params)
     }
     const updateResult = await database.updateEntity(id, params)
     return updateResult

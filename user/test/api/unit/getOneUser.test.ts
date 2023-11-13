@@ -2,7 +2,7 @@ import request from 'supertest'
 import { StatusCode } from 'status-code-enum'
 
 import * as TestSetup from '../test.setup'
-import { SampleEntities } from '../data/users.sample'
+import { SampleUsers } from '../data/users.sample'
 
 describe('GET /:id', () => {
   test('returns status code 200 if it gets a given user id', async () => {
@@ -16,6 +16,6 @@ describe('GET /:id', () => {
     const res: any = await request(TestSetup.app)
       .get(`/${TestSetup.defaultEntityId}`)
 
-    expect(res.body.data.email).toEqual(SampleEntities[0].email)
+    expect(res.body.data.email).toEqual(SampleUsers[0].email)
   })
 })

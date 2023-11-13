@@ -11,7 +11,6 @@ export const app: Express = express()
 dotenv.config()
 
 const database: Database = createDatabaseObject(Number(process.env.DATABASE_TYPE), String(process.env.DATABASE_CONNECTION_URL))
-console.log(process.env.DATABASE_CONNECTION_URL)
 
 database.connect()
   .catch((error) => {
