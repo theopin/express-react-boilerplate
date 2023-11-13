@@ -11,7 +11,7 @@ let server: any
 let ModelObject: any
 
 const beforeAllFunction = beforeAll(() => {
-  ModelObject = mongoose.models.Entity
+  ModelObject = mongoose.models.User
 
   server = app.listen(port, () => {
     console.log(`[test]: Server is running at http://localhost:${port}`)

@@ -1,4 +1,4 @@
-export const SampleEntities = [
+export const SampleUsers = [
   {
     email: 'test@test.com',
     username: 'shawn',

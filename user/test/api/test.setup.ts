@@ -1,5 +1,5 @@
 import { app } from '../index'
-import { SampleEntities } from './data/entities.sample'
+import { SampleUsers } from './data/users.sample'
 
 import mongoose from 'mongoose'
 const port = 4101
@@ -9,7 +9,7 @@ let server: any
 let ModelObject: any
 
 const beforeAllFunction = beforeAll(() => {
-  ModelObject = mongoose.models.Entity
+  ModelObject = mongoose.models.User
 
   server = app.listen(port, () => {
     console.log(`[test]: Server is running at http://localhost:${port}`)
@@ -17,7 +17,7 @@ const beforeAllFunction = beforeAll(() => {
 })
 
 const beforeEachFunction = beforeEach(async () => {
-  const modelInstances = SampleEntities.map(data => new ModelObject(data))
+  const modelInstances = SampleUsers.map(data => new ModelObject(data))
 
   const saveResult = await ModelObject.insertMany(modelInstances)
   defaultEntityId = saveResult[0]._id

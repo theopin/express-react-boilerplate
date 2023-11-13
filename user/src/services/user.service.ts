@@ -22,6 +22,10 @@ class UserService {
   }
 
   async updateUserById (database: Database, id: any, params: any): Promise<any> {
+    if (params.password !== null || params.password !== undefined) {
+      const hashedPassword = await bcrypt.hash(params.password, SALT_ROUNDS)
+      params.password = hashedPassword
+    }
     const updateResult = await database.updateEntity(id, params)
     return updateResult
   }
