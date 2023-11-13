@@ -1,7 +1,12 @@
+import bcrypt from 'bcrypt'
 import type Database from '../database/interface/database.interface'
+
+const SALT_ROUNDS = 10
 
 class UserService {
   async createNewUser (database: Database, params: any): Promise<any> {
+    const hashedPassword = await bcrypt.hash(params.password, SALT_ROUNDS)
+    params.password = hashedPassword
     const createResult = await database.createEntity(params)
     return createResult
   }

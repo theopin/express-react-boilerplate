@@ -35,6 +35,7 @@ class UserController {
   createNewUser (req: Request, res: Response, next: NextFunction): void {
     const body = req.body
     const database = req.app.get('database')
+
     userServiceObject
       .createNewUser(database, body)
       .then((createResult) => {
