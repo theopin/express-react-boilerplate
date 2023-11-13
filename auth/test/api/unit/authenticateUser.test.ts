@@ -21,30 +21,14 @@ describe('POST /login', () => {
     expect(res.statusCode).toEqual(StatusCode.ClientErrorBadRequest)
   })
 
-  test('returns a defined refresh token', async () => {
-    const res: any = await request(TestSetup.app)
-      .post('/login')
-      .send({ username: 'shawn', password: '123456' })
-
-    expect(res.body.data.refreshToken).toBeDefined()
-  })
-
-  test('returns a defined access token', async () => {
-    const res: any = await request(TestSetup.app)
-      .post('/login')
-      .send({ username: 'shawn', password: '123456' })
-
-    expect(res.body.data.accessToken).toBeDefined()
-  })
-
   test('returns a deconstructable refresh token', async () => {
     const res: any = await request(TestSetup.app)
       .post('/login')
       .send({ username: 'shawn', password: '123456' })
 
-    const tokenData = jwt.verify(res.body.data.refreshToken, JwtConstants.refresh.secret)
+    const tokenData: any = jwt.verify(res.body.data.refreshToken, JwtConstants.refresh.secret)
 
-    expect(tokenData).toBeDefined()
+    expect(tokenData.username).toEqual('shawn')
   })
 
   test('returns a deconstructable access token', async () => {
@@ -52,8 +36,7 @@ describe('POST /login', () => {
       .post('/login')
       .send({ username: 'shawn', password: '123456' })
 
-    const tokenData = jwt.verify(res.body.data.accessToken, JwtConstants.access.secret)
-
-    expect(tokenData).toBeDefined()
+    const tokenData: any = jwt.verify(res.body.data.accessToken, JwtConstants.access.secret)
+    expect(tokenData.username).toEqual('shawn')
   })
 })

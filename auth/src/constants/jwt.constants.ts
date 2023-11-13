@@ -5,10 +5,10 @@ dotenv.config()
 export const JwtConstants: any = {
   refresh: {
     secret: 'Hello',
-    expiresIn: '30m'
+    expiresIn: '1h'
   },
   access: {
     secret: 'Lol',
-    expiresIn: '30m'
+    expiresIn: '1h'
   }
 }

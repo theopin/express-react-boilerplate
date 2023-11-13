@@ -1,7 +1,7 @@
 // import db
 import type Database from '../database/interface/database.interface'
 import bcrypt from 'bcrypt'
-import jwt, { type JwtPayload } from 'jsonwebtoken'
+import jwt from 'jsonwebtoken'
 
 class AuthService {
   async createNewEntity (database: Database, params: any): Promise<any> {
@@ -22,8 +22,8 @@ class AuthService {
     return jwt.sign(identifiers, tokenSecret, { expiresIn: tokenExpiry })
   }
 
-  validateJwtToken (jwtToken: string, tokenSecret: string): JwtPayload {
-    return jwt.verify(jwtToken, tokenSecret) as JwtPayload
+  validateJwtToken (jwtToken: string, tokenSecret: string): any {
+    return jwt.verify(jwtToken, tokenSecret)
   }
 }
 

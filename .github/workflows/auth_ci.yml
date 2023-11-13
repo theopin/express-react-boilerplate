@@ -1,0 +1,48 @@
+name: Continuous Integration Workflow - Authentication
+on:
+  pull_request:
+    branches:
+      - main # Run the workflow only on pull requests to the main branch
+    paths:
+      - 'auth/**' # Workflow triggered on changes to code within express directory
+      - '.github/workflows/auth_ci.yml'
+
+jobs:
+  test:
+    defaults:
+        run:
+            working-directory: ./auth
+
+    runs-on: ubuntu-latest
+    strategy:
+        matrix:
+          node-version: [17.x]
+          mongodb-version: ['5.0']
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.8.0
+        with:
+            mongodb-version: ${{ matrix.mongodb-version }}
+            mongodb-port: 27017
+
+      - name: Run Unit & Integration Tests
+        run: npm run test
+        env:
+          DATABASE_TYPE: ${{ secrets.DATABASE_TYPE }}
+          DATABASE_CONNECTION_URL: ${{ secrets.DATABASE_CONNECTION_URL }}
+          
+
+      - name: Lint Codebase
+        run: npm run lint

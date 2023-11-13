@@ -1,6 +1,6 @@
 import { type Request, type Response, type NextFunction } from 'express'
 import { StatusCode } from 'status-code-enum'
-import { JsonWebTokenError, type JwtPayload } from 'jsonwebtoken'
+import { JsonWebTokenError } from 'jsonwebtoken'
 
 import AuthService from '../services/auth.service'
 import { JwtConstants } from '../constants/jwt.constants'
@@ -79,13 +79,14 @@ class AuthController {
     }
     try {
       const refreshToken = req.headers.authorization.split(' ')[1]
-      const jwtTokenObject: JwtPayload = authServiceObject.validateJwtToken(refreshToken, JwtConstants.refresh.secret)
+      const jwtTokenObject: any = authServiceObject.validateJwtToken(refreshToken, JwtConstants.refresh.secret)
+
       if (jwtTokenObject === null || jwtTokenObject === undefined) {
         throw new JsonWebTokenError('undefined token data')
       }
 
       const result = {
-        accessToken: authServiceObject.createJwtToken(jwtTokenObject.username, JwtConstants.access.secret, JwtConstants.access.expiresIn)
+        accessToken: authServiceObject.createJwtToken({ username: jwtTokenObject.username }, JwtConstants.access.secret, JwtConstants.access.expiresIn)
       }
 
       res.status(StatusCode.SuccessOK).json({
@@ -95,7 +96,7 @@ class AuthController {
     } catch (errorObject: any) {
       const errorResponse = JSON.parse(serverErrorResponse)
 
-      console.log('header', req.headers.authorization, errorObject.name, JwtConstants.access.expiresIn, 10101010, errorObject.message)
+      console.log('error', req.headers.authorization.split(' ')[1], errorObject.name, JwtConstants.refresh.expiresIn, 10101010, errorObject.message)
 
       if (errorObject.name === 'TokenExpiredError' || errorObject.name === 'InvalidTokenError' || errorObject.name === 'JsonWebTokenError') {
         errorResponse.statusCode = StatusCode.ClientErrorBadRequest
