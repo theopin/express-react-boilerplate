@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 const { Schema } = mongoose
 
-const entityModelName = 'Entity'
+const entityModelName = 'User'
 const entitySchema = new Schema({
   email: {
     type: String,

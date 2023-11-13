@@ -1,7 +1,7 @@
 import express, { type Express } from 'express'
 import dotenv from 'dotenv'
 
-import EntityRouter from '../src/routes/entity.route'
+import EntityRouter from '../src/routes/user.route'
 import { createDatabaseObject } from '../src/database/factory/databaseFactory'
 
 import type Database from '../src/database/interface/database.interface'
@@ -22,4 +22,4 @@ app.set('database', database)
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-app.use('/api', EntityRouter)
+app.use('/', EntityRouter)

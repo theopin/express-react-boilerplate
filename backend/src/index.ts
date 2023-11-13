@@ -10,7 +10,7 @@ import { createDatabaseObject } from './database/factory/databaseFactory'
 dotenv.config()
 
 const app: Express = express()
-const port = process.env.PORT ?? 4000
+const port = process.env.PORT ?? 4000 // Recommended: change default port, do not use 4000, 4001 and 4002
 
 const database: Database = createDatabaseObject(Number(process.env.DATABASE_TYPE), String(process.env.DATABASE_CONNECTION_URL))
 

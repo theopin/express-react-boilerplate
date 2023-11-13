@@ -4,16 +4,13 @@ services:
     container_name: mongo-database
     image: mongo:latest
 
-
-  auth-service:
+  frontend-service:
     env_file:
-      - ./auth/.env
-    container_name: auth-service
-    build: ./auth
-    depends_on:
-      - mongodb
+      - ./frontend/.env
+    container_name: frontend-service
+    build: ./frontend
     ports:
-      - 4001
+      - 80:80
 
   backend-service:
     env_file:
@@ -23,13 +20,26 @@ services:
     depends_on:
       - mongodb
     ports:
-      - 4000:4000
+      - 4000
 
-  
-  frontend-service:
+  user-service:
     env_file:
-      - ./frontend/.env
-    container_name: frontend-service
-    build: ./frontend
+      - ./user/.env
+    container_name: user-service
+    build: ./user
+    depends_on:
+      - mongodb
     ports:
-      - 80:80
+      - 4001
+
+  auth-service:
+    env_file:
+      - ./auth/.env
+    container_name: auth-service
+    build: ./auth
+    depends_on:
+      - mongodb
+    ports:
+      - 4002
+
+  # Add any new services below 

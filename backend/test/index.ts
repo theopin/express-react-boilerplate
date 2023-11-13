@@ -22,4 +22,4 @@ app.set('database', database)
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-app.use('/api', EntityRouter)
+app.use('/', EntityRouter)

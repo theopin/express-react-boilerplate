@@ -1,8 +1,8 @@
 import { type Request, type Response, type NextFunction } from 'express'
 import { StatusCode } from 'status-code-enum'
-import EntityService from '../services/entity.service'
+import UserService from '../services/user.service'
 
-const entityServiceObject = new EntityService()
+const userServiceObject = new UserService()
 
 const serverErrorResponse = JSON.stringify({
   statusCode: StatusCode.ServerErrorInternal,
@@ -12,7 +12,7 @@ const serverErrorResponse = JSON.stringify({
   }
 })
 
-class EntityController {
+class UserController {
   getHealthStatus (_req: Request, res: Response, next: NextFunction): void {
     try {
       res.status(StatusCode.SuccessOK).json({
@@ -32,11 +32,11 @@ class EntityController {
     }
   }
 
-  createNewEntity (req: Request, res: Response, next: NextFunction): void {
+  createNewUser (req: Request, res: Response, next: NextFunction): void {
     const body = req.body
     const database = req.app.get('database')
-    entityServiceObject
-      .createNewEntity(database, body)
+    userServiceObject
+      .createNewUser(database, body)
       .then((createResult) => {
         res.status(StatusCode.SuccessCreated).json({
           status: true,
@@ -55,12 +55,12 @@ class EntityController {
       })
   }
 
-  getEntityById (req: Request, res: Response, next: NextFunction): void {
+  getUserById (req: Request, res: Response, next: NextFunction): void {
     const { id } = req.params
     const database = req.app.get('database')
 
-    entityServiceObject
-      .getEntityById(database, id)
+    userServiceObject
+      .getUserById(database, id)
       .then((getResult) => {
         res.status(StatusCode.SuccessOK).json({
           status: true,
@@ -79,12 +79,12 @@ class EntityController {
       })
   }
 
-  getAllEntities (req: Request, res: Response, next: NextFunction): void {
+  getAllUsers (req: Request, res: Response, next: NextFunction): void {
     const { params } = req.params
     const database = req.app.get('database')
 
-    entityServiceObject
-      .getAllEntities(database, params)
+    userServiceObject
+      .getAllUsers(database, params)
       .then((getAllResult) => {
         res.status(StatusCode.SuccessOK).json({
           status: true,
@@ -103,13 +103,13 @@ class EntityController {
       })
   }
 
-  updateEntityById (req: Request, res: Response, next: NextFunction): void {
+  updateUserById (req: Request, res: Response, next: NextFunction): void {
     const newData = req.body
     const { id } = req.params
     const database = req.app.get('database')
 
-    entityServiceObject
-      .updateEntityById(database, id, newData)
+    userServiceObject
+      .updateUserById(database, id, newData)
       .then((updateResult) => {
         res.status(StatusCode.SuccessOK).json({
           status: true,
@@ -128,12 +128,12 @@ class EntityController {
       })
   }
 
-  deleteEntityById (req: Request, res: Response, next: NextFunction): void {
+  deleteUserById (req: Request, res: Response, next: NextFunction): void {
     const { id } = req.params
     const database = req.app.get('database')
 
-    entityServiceObject
-      .deleteEntityById(database, id)
+    userServiceObject
+      .deleteUserById(database, id)
       .then((deleteResult) => {
         res.status(StatusCode.SuccessOK).json({
           status: true,
@@ -153,4 +153,4 @@ class EntityController {
   }
 }
 
-export default EntityController
+export default UserController

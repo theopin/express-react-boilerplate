@@ -1,6 +1,6 @@
 import type Database from '../interface/database.interface'
 import mongoose from 'mongoose'
-import { entitySchema, entityModelName } from '../../models/entity.model'
+import { entitySchema, entityModelName } from '../../models/user.model'
 
 const newDocumentConfig = { new: true }
 

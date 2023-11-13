@@ -2,7 +2,7 @@ import { app } from '../index'
 import { SampleEntities } from './data/entities.sample'
 
 import mongoose from 'mongoose'
-const port = 4010
+const port = 4101
 
 let defaultEntityId: string = ''
 let server: any

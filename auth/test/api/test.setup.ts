@@ -4,7 +4,7 @@ import { SampleEntities } from './data/entities.sample'
 import mongoose from 'mongoose'
 import bcrypt from 'bcrypt'
 
-const port = 4010
+const port = 4102
 
 let defaultEntityId: string = ''
 let server: any

@@ -2,7 +2,7 @@ import express, { type Express } from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
 
-import EntityRouter from './routes/entity.route'
+import UserRouter from './routes/user.route'
 
 import type Database from './database/interface/database.interface'
 import { createDatabaseObject } from './database/factory/databaseFactory'
@@ -10,7 +10,7 @@ import { createDatabaseObject } from './database/factory/databaseFactory'
 dotenv.config()
 
 const app: Express = express()
-const port = process.env.PORT ?? 4000
+const port = process.env.PORT ?? 4001
 
 const database: Database = createDatabaseObject(Number(process.env.DATABASE_TYPE), String(process.env.DATABASE_CONNECTION_URL))
 
@@ -26,7 +26,7 @@ app.options('*', cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-app.use('/', EntityRouter)
+app.use('/', UserRouter)
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`)
