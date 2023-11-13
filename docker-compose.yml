@@ -5,6 +5,16 @@ services:
     image: mongo:latest
 
 
+  auth-service:
+    env_file:
+      - ./auth/.env
+    container_name: auth-service
+    build: ./auth
+    depends_on:
+      - mongodb
+    ports:
+      - 4001
+
   backend-service:
     env_file:
       - ./backend/.env
