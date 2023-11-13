@@ -1,5 +1,7 @@
 import { type Request, type Response, type NextFunction } from 'express'
 import { StatusCode } from 'status-code-enum'
+import { JsonWebTokenError, type JwtPayload } from 'jsonwebtoken'
+
 import AuthService from '../services/auth.service'
 import { JwtConstants } from '../constants/jwt.constants'
 
@@ -35,18 +37,16 @@ class AuthController {
 
   authenticateUser (req: Request, res: Response, next: NextFunction): void {
     const body = req.body
-    const { id } = req.params
     const database = req.app.get('database')
 
     authServiceObject
-      .getEntityById(database, id)
+      .getEntityByUsername(database, body.username)
       .then(async (getResult: { password: any } | null | undefined) => {
         if (getResult === null || getResult === undefined) {
           throw new Error('BadUsernameError')
         }
 
         const validateResult: boolean = await authServiceObject.validatePassword(body.password, getResult.password)
-
         if (!validateResult) {
           throw new Error('InvalidCredentialsError')
         }
@@ -56,7 +56,7 @@ class AuthController {
           accessToken: authServiceObject.createJwtToken(body, JwtConstants.access.secret, JwtConstants.access.expiresIn)
         }
 
-        res.status(StatusCode.SuccessOK).json({
+        res.status(StatusCode.SuccessAccepted).json({
           status: true,
           data: result
         })
@@ -68,24 +68,24 @@ class AuthController {
           errorResponse.statusCode = StatusCode.ClientErrorBadRequest
         }
 
-        res.status(errorResponse.statusCodentityServiceObjecte).json(errorResponse.response)
+        res.status(errorResponse.statusCode).json(errorResponse.response)
         next(errorObject)
       })
   }
 
   obtainAccessToken (req: Request, res: Response, next: NextFunction): void {
-    const body = req.body // replace with auth
-
+    if (req.headers.authorization === null || req.headers.authorization === undefined) {
+      throw new JsonWebTokenError('undefined token')
+    }
     try {
-      const abc: string = authServiceObject.validateJwtToken(body.token, JwtConstants.refresh.secret)
-
-      if (abc === null || abc === undefined) {
-        throw new Error('InvalidToken')
+      const refreshToken = req.headers.authorization.split(' ')[1]
+      const jwtTokenObject: JwtPayload = authServiceObject.validateJwtToken(refreshToken, JwtConstants.refresh.secret)
+      if (jwtTokenObject === null || jwtTokenObject === undefined) {
+        throw new JsonWebTokenError('undefined token data')
       }
 
       const result = {
-        refreshToken: authServiceObject.createJwtToken(body, JwtConstants.refresh.secret, JwtConstants.refresh.expiresIn),
-        accessToken: authServiceObject.createJwtToken(body, JwtConstants.access.secret, JwtConstants.access.expiresIn)
+        accessToken: authServiceObject.createJwtToken(jwtTokenObject.username, JwtConstants.access.secret, JwtConstants.access.expiresIn)
       }
 
       res.status(StatusCode.SuccessOK).json({
@@ -95,11 +95,13 @@ class AuthController {
     } catch (errorObject: any) {
       const errorResponse = JSON.parse(serverErrorResponse)
 
-      if (errorObject.message === 'BadUsernameError' || errorObject.message === 'InvalidCredentialsError') {
+      console.log('header', req.headers.authorization, errorObject.name, JwtConstants.access.expiresIn, 10101010, errorObject.message)
+
+      if (errorObject.name === 'TokenExpiredError' || errorObject.name === 'InvalidTokenError' || errorObject.name === 'JsonWebTokenError') {
         errorResponse.statusCode = StatusCode.ClientErrorBadRequest
       }
 
-      res.status(errorResponse.statusCodentityServiceObjecte).json(errorResponse.response)
+      res.status(errorResponse.statusCode).json(errorResponse.response)
       next(errorObject)
     }
   }

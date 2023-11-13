@@ -9,7 +9,7 @@ AuthRouter.get('/health', authControllerObject.getHealthStatus)
 // Authenticate with given credentials
 AuthRouter.post('/login', authControllerObject.authenticateUser)
 
-// Get all app Entity
+// Get access token using existing refresh token
 AuthRouter.get('/access', authControllerObject.obtainAccessToken)
 
 export default AuthRouter

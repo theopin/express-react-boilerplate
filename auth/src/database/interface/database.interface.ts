@@ -7,6 +7,8 @@ interface Database {
 
   getOneEntity: (id: string) => Promise<any>
 
+  getOneEntityByUsername: (username: string) => Promise<any>
+
   getAllEntities: (params: Partial<any>) => Promise<any>
 
   updateEntity: (id: string, newData: Partial<any>) => Promise<any>

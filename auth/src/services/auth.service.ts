@@ -9,8 +9,8 @@ class AuthService {
     return createResult
   }
 
-  async getEntityById (database: Database, id: string): Promise<any> {
-    const getOneResult = await database.getOneEntity(id)
+  async getEntityByUsername (database: Database, username: string): Promise<any> {
+    const getOneResult = await database.getOneEntityByUsername(username)
     return getOneResult
   }
 
@@ -22,8 +22,8 @@ class AuthService {
     return jwt.sign(identifiers, tokenSecret, { expiresIn: tokenExpiry })
   }
 
-  validateJwtToken (jwtToken: string, tokenSecret: string): string | JwtPayload {
-    return jwt.verify(jwtToken, tokenSecret)
+  validateJwtToken (jwtToken: string, tokenSecret: string): JwtPayload {
+    return jwt.verify(jwtToken, tokenSecret) as JwtPayload
   }
 }
 

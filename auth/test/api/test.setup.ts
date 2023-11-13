@@ -2,6 +2,8 @@ import { app } from '../index'
 import { SampleEntities } from './data/entities.sample'
 
 import mongoose from 'mongoose'
+import bcrypt from 'bcrypt'
+
 const port = 4010
 
 let defaultEntityId: string = ''
@@ -17,7 +19,13 @@ const beforeAllFunction = beforeAll(() => {
 })
 
 const beforeEachFunction = beforeEach(async () => {
-  const modelInstances = SampleEntities.map(data => new ModelObject(data))
+  const copiedEntities = JSON.parse(JSON.stringify(SampleEntities))
+
+  for (const element of copiedEntities) {
+    element.password = await bcrypt.hash(element.password, 10)
+  }
+
+  const modelInstances = copiedEntities.map((data: any) => new ModelObject(data))
 
   const saveResult = await ModelObject.insertMany(modelInstances)
   defaultEntityId = saveResult[0]._id
