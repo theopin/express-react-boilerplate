@@ -106,6 +106,35 @@ class AuthController {
       next(errorObject)
     }
   }
+
+  verifyAccessToken (req: Request, res: Response, next: NextFunction): void {
+    if (req.headers.authorization === null || req.headers.authorization === undefined) {
+      throw new JsonWebTokenError('undefined token')
+    }
+    try {
+      const accessToken = req.headers.authorization.split(' ')[1]
+      const jwtTokenObject: any = authServiceObject.validateJwtToken(accessToken, JwtConstants.accessToken.secret)
+
+      if (jwtTokenObject === null || jwtTokenObject === undefined) {
+        throw new JsonWebTokenError('undefined token data')
+      }
+
+      res.status(StatusCode.SuccessOK).json({
+        status: true
+      })
+    } catch (errorObject: any) {
+      const errorResponse = JSON.parse(serverErrorResponse)
+
+      console.log('error', req.headers.authorization.split(' ')[1], errorObject.name, JwtConstants.refresh.expiresIn, 10101010, errorObject.message)
+
+      if (errorObject.name === 'TokenExpiredError' || errorObject.name === 'InvalidTokenError' || errorObject.name === 'JsonWebTokenError') {
+        errorResponse.statusCode = StatusCode.ClientErrorBadRequest
+      }
+
+      res.status(errorResponse.statusCode).json(errorResponse.response)
+      next(errorObject)
+    }
+  }
 }
 
 export default AuthController
