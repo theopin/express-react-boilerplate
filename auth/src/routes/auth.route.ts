@@ -13,6 +13,6 @@ AuthRouter.post('/login', authControllerObject.authenticateUser)
 AuthRouter.get('/access', authControllerObject.obtainAccessToken)
 
 // Verify validity of existing access token
-AuthRouter.get('/verify', authControllerObject.obtainAccessToken)
+AuthRouter.get('/verify', authControllerObject.verifyAccessToken)
 
 export default AuthRouter

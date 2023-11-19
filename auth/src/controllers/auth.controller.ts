@@ -113,7 +113,7 @@ class AuthController {
     }
     try {
       const accessToken = req.headers.authorization.split(' ')[1]
-      const jwtTokenObject: any = authServiceObject.validateJwtToken(accessToken, JwtConstants.accessToken.secret)
+      const jwtTokenObject: any = authServiceObject.validateJwtToken(accessToken, JwtConstants.access.secret)
 
       if (jwtTokenObject === null || jwtTokenObject === undefined) {
         throw new JsonWebTokenError('undefined token data')

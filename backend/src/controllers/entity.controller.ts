@@ -82,6 +82,7 @@ class EntityController {
   getAllEntities (req: Request, res: Response, next: NextFunction): void {
     const { params } = req.params
     const database = req.app.get('database')
+    console.log(req.params.authorization)
 
     entityServiceObject
       .getAllEntities(database, params)
