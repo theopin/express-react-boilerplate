@@ -1,0 +1,47 @@
+name: Continuous Integration Workflow - Gateway
+on:
+  pull_request:
+    branches:
+      - main # Run the workflow only on pull requests to the main branch
+    paths:
+      - 'gateway/**' # Workflow triggered on changes to code within express directory
+      - 'docker-compose.yml'
+      - '.github/workflows/gateway_ci.yml'
+
+jobs:
+  test:
+    defaults:
+        run:
+            working-directory: .
+
+    runs-on: ubuntu-latest
+    strategy:
+        matrix:
+          node-version: [18.x]
+          mongodb-version: ['5.0']
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+    # Setup Secrets here
+
+      - name: Create env for auth service
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          envkey_DATABASE_CONNECTION_URL: ${{ secrets.DATABASE_CONNECTION_URL }}
+          directory: ./auth
+          file_name: .env.prod
+          fail_on_empty: true
+
+      - name: Orchestrate microservices
+        run: docker-compose -f "docker-compose.yml" up -d --build
+        working-directory: ./
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./gateway
+
+      - name: Test Gateway Service
+        run: npm test
+        working-directory: ./gateway
