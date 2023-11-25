@@ -1,45 +1,49 @@
 version: "3"
 services:
   mongodb:
-    container_name: mongo-database
+    container_name: mongodb
     image: mongo:latest
 
-  frontend-service:
+  frontend:
     env_file:
       - ./frontend/.env
-    container_name: frontend-service
+    container_name: frontend
     build: ./frontend
     ports:
       - 80:80
 
-  backend-service:
+  backend:
     env_file:
       - ./backend/.env
-    container_name: backend-service
+    container_name: backend
     build: ./backend
     depends_on:
       - mongodb
-    ports:
-      - 4000
 
-  user-service:
+  user:
     env_file:
       - ./user/.env
-    container_name: user-service
+    container_name: user
     build: ./user
     depends_on:
       - mongodb
-    ports:
-      - 4001
 
-  auth-service:
+  auth:
     env_file:
       - ./auth/.env
-    container_name: auth-service
+    container_name: auth
     build: ./auth
     depends_on:
       - mongodb
+
+  gateway:
+    build: ./gateway
+    container_name: gateway
+    depends_on:
+      - backend
+      - user
+      - auth
     ports:
-      - 4002
+      - 8080:80
 
   # Add any new services below 

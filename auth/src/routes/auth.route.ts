@@ -12,4 +12,7 @@ AuthRouter.post('/login', authControllerObject.authenticateUser)
 // Get access token using existing refresh token
 AuthRouter.get('/access', authControllerObject.obtainAccessToken)
 
+// Verify validity of existing access token
+AuthRouter.get('/verify', authControllerObject.verifyAccessToken)
+
 export default AuthRouter

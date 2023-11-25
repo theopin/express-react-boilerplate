@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { EntityRequestApi } from '../../api/entity/EntityRequest'
+import { EntityRequestApi } from '../../api/entity/EntityRequestApi'
 import { type Entity } from '../../models/user/Entity'
 import { ToastUtils } from '../../components/toasts/utils/ToastUtils'
 
@@ -14,7 +14,7 @@ export function UserDetails (): JSX.Element {
     } catch (error) {
       // Handle errors here
       console.error('Error fetching data:', error)
-      ToastUtils.createErrorToast('Hello')
+      ToastUtils.createSuccessToast('Hello')
     }
   }
 
