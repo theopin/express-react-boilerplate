@@ -16,7 +16,7 @@ describe('GET /backend', () => {
     expect(res.statusCode).toEqual(StatusCode.SuccessOK)
   })
 
-  test('returns backend data with valid access token', async () => {
+  test('returns backend response with valid access token', async () => {
     const res: any = await request(baseEndpoint + '/backend')
       .get('/')
       .set('Authorization', `Bearer ${sampleAccessToken}`)
