@@ -70,5 +70,5 @@ jobs:
         working-directory: ./gateway
 
       - name: Test Gateway Service
-        run: npm test
+        run: npm run test-debug
         working-directory: ./gateway

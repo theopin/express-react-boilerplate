@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken'
 const baseEndpoint = 'http://localhost:8080'
 
 const sampleAccessToken = jwt.sign({ username: 'tom' }, JwtConstants.access.secret, { expiresIn: JwtConstants.access.expiresIn })
+console.log(sampleAccessToken)
 
 describe('GET /backend', () => {
   test('returns status code 200 if it is able to redirect to the backend protected endpoint with valid access token', async () => {
