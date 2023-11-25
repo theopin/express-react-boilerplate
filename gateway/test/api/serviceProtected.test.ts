@@ -7,18 +7,18 @@ const baseEndpoint = 'http://localhost:8080/'
 
 const sampleAccessToken = jwt.sign({ username: 'tom' }, JwtConstants.access.secret, { expiresIn: JwtConstants.access.expiresIn })
 
-describe('GET /health', () => {
+describe('GET /backend', () => {
   test('returns status code 200 if it is able to redirect to the backend protected endpoint with valid access token', async () => {
     const res: any = await request(baseEndpoint + 'backend')
-      .get('/')
+      .get('/backend/')
       .set('Authorization', `Bearer ${sampleAccessToken}`)
 
     expect(res.statusCode).toEqual(StatusCode.SuccessOK)
   })
 
-  test('returns backend data', async () => {
+  test('returns backend data with valid access token', async () => {
     const res: any = await request(baseEndpoint + 'backend')
-      .get('/')
+      .get('/backend/')
       .set('Authorization', `Bearer ${sampleAccessToken}`)
 
     expect(res.body.status).toEqual(true)
@@ -26,7 +26,7 @@ describe('GET /health', () => {
 
   test('returns status code 500 if it is able to throw error to the backend protected endpoint with invalid access token', async () => {
     const res: any = await request(baseEndpoint + 'backend')
-      .get('/')
+      .get('/backend/')
       .set('Authorization', `Bearer ${'lol'}`)
 
     expect(res.statusCode).toEqual(StatusCode.ServerErrorInternal)
