@@ -6,43 +6,63 @@ const info = {
   description: '\r\nThis is the Entity API for the Express boilerplate application. \r\n\r\n',
   schema: 'https://schema.getpostman.com/json/collection/v2.1.0/collection.json'
 }
+
+const endpoints: Array<{ name: string, request: { method: string, url: string } }> = []
+
 async function generateApiEndpoints (): Promise<any> {
-  const endpoints: Array<{ name: string, request: { method: string, url: string } }> = []
+  const rootDirectory = path.join(__dirname, '..', '..')
+  const serviceRoots = fs.readdirSync(rootDirectory)
+  const routeDir = 'src/routes'
 
-  // Define the base directory for route files
-  const routesDirectory = path.join(__dirname, '..', '..', 'backend', 'src', 'routes')
+  for (const serviceRoot of serviceRoots) {
+    const serviceRouteDir = path.join(rootDirectory, serviceRoot, routeDir)
 
-  // Read each component's route file dynamically
-  const componentFolders = fs.readdirSync(routesDirectory)
-  for (const componentFolder of componentFolders) {
-    const routeFile = path.join(routesDirectory, componentFolder)
-    console.log(routeFile)
-
-    // Check if the route file exists
-    if (fs.existsSync(routeFile)) {
-      const componentRoutes = (await import(routeFile))
-      const routerStack = componentRoutes.default._router.stack
-
-      routerStack.forEach((layer: any) => {
-        if (layer.route !== null && layer.route !== undefined) {
-          const route = layer.route
-          const endpoint = {
-            name: `${layer.route.stack[0].method} ${componentFolder.split('.')[0]}`,
-            request: {
-              method: layer.route.stack[0].method.toUpperCase(),
-              url: `http://{{base_url}}${route.path}`
-            }
-
-          }
-          endpoints.push(endpoint)
-        }
-      })
+    if (fs.existsSync(serviceRouteDir)) {
+      console.log(303, serviceRouteDir)
+      await traverseRouteFile(serviceRouteDir)
     }
   }
+
   return {
     ...info,
     items: endpoints
   }
+}
+
+async function traverseRouteFile (routesDirectory: string): Promise<void> {
+  const routeFilePaths = fs.readdirSync(routesDirectory)
+  for (const routeFilePath of routeFilePaths) {
+    const routeFile = path.join(routesDirectory, routeFilePath)
+    console.log(routeFile)
+
+    // Check if the route file exists
+    if (fs.existsSync(routeFile)) {
+      await generateEndpointObjects(routeFile)
+    }
+  }
+}
+
+async function generateEndpointObjects (routeFile: string): Promise<void> {
+  const componentRoutes = (await import(routeFile))
+  const routerStack = componentRoutes.default._router.stack
+
+  routerStack.forEach((layer: any) => {
+    if (layer.route !== null && layer.route !== undefined) {
+      const route = layer.route
+
+      const pathArray = routeFile.split('.')[0].split('/')
+      const pathArrayLastWord = pathArray[pathArray.length - 1]
+
+      const endpoint = {
+        name: `${layer.route.stack[0].method} ${pathArrayLastWord}`,
+        request: {
+          method: layer.route.stack[0].method.toUpperCase(),
+          url: `http://{{base_url}}${route.path}`
+        }
+      }
+      endpoints.push(endpoint)
+    }
+  })
 }
 
 generateApiEndpoints()
@@ -50,7 +70,7 @@ generateApiEndpoints()
     const jsonFilePath = path.join(__dirname, 'postman.collection.json')
     fs.writeFileSync(jsonFilePath, JSON.stringify(apiEndPoints, null, 2))
 
-    console.log(`ApiEndpoints written to ${jsonFilePath}`)
+    console.log(`Api Endpoints written to ${jsonFilePath}`)
   }).catch((error) => {
     console.log(error)
   })
