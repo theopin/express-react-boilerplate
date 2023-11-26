@@ -1,0 +1,49 @@
+{
+  "name": "Entity API",
+  "description": "\r\nThis is the Entity API for the Express boilerplate application. \r\n\r\n",
+  "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+  "items": [
+    {
+      "name": "get entity",
+      "request": {
+        "method": "GET",
+        "url": "http://{{base_url}}/health"
+      }
+    },
+    {
+      "name": "post entity",
+      "request": {
+        "method": "POST",
+        "url": "http://{{base_url}}/"
+      }
+    },
+    {
+      "name": "get entity",
+      "request": {
+        "method": "GET",
+        "url": "http://{{base_url}}/"
+      }
+    },
+    {
+      "name": "get entity",
+      "request": {
+        "method": "GET",
+        "url": "http://{{base_url}}/:id"
+      }
+    },
+    {
+      "name": "patch entity",
+      "request": {
+        "method": "PATCH",
+        "url": "http://{{base_url}}/:id"
+      }
+    },
+    {
+      "name": "delete entity",
+      "request": {
+        "method": "DELETE",
+        "url": "http://{{base_url}}/:id"
+      }
+    }
+  ]
+}

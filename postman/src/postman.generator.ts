@@ -10,7 +10,7 @@ async function generateApiEndpoints (): Promise<any> {
   const endpoints: Array<{ name: string, request: { method: string, url: string } }> = []
 
   // Define the base directory for route files
-  const routesDirectory = path.join(__dirname, '..', 'src', 'routes')
+  const routesDirectory = path.join(__dirname, '..', '..', 'backend', 'src', 'routes')
 
   // Read each component's route file dynamically
   const componentFolders = fs.readdirSync(routesDirectory)
@@ -30,7 +30,7 @@ async function generateApiEndpoints (): Promise<any> {
             name: `${layer.route.stack[0].method} ${componentFolder.split('.')[0]}`,
             request: {
               method: layer.route.stack[0].method.toUpperCase(),
-              url: `http://localhost:3000${route.path}`
+              url: `http://{{base_url}}${route.path}`
             }
 
           }
@@ -47,7 +47,7 @@ async function generateApiEndpoints (): Promise<any> {
 
 generateApiEndpoints()
   .then((apiEndPoints) => {
-    const jsonFilePath = path.join(__dirname, '..', 'postman', 'postman.collection.json')
+    const jsonFilePath = path.join(__dirname, 'postman.collection.json')
     fs.writeFileSync(jsonFilePath, JSON.stringify(apiEndPoints, null, 2))
 
     console.log(`ApiEndpoints written to ${jsonFilePath}`)
