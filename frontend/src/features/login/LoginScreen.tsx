@@ -11,7 +11,7 @@ export function LoginScreen (): JSX.Element {
       const response = await AuthApi.authenticateUser({ username, password })
 
       localStorage.setItem('refreshToken', response.data.data.refreshToken)
-      localStorage.setItem('refreshToken', response.data.data.accessToken)
+      localStorage.setItem('accessToken', response.data.data.accessToken)
 
       ToastUtils.createSuccessToast('Login successful: ' + response.data.status)
     } catch (error: any) {

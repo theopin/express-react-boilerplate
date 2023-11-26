@@ -8,19 +8,20 @@ export function UserDetails (): JSX.Element {
 
   async function fetchData (): Promise<void> {
     try {
+      console.log(localStorage.getItem('accessToken'))
       const result = await EntityApi.getEntities() // Todo: Change
-
+      console.log(JSON.stringify(result))
       setUserDetails(result.data.data[0])
-    } catch (error) {
+      ToastUtils.createSuccessToast('Hello')
+    } catch (error: any) {
       // Handle errors here
-      console.error('Error fetching data:', error)
-      ToastUtils.createErrorToast('Hello')
+      const errorMessage = error.message !== undefined ? error.message : 'Login failed'
+      ToastUtils.createErrorToast(errorMessage)
     }
   }
 
   useEffect(() => {
     void fetchData()
-    ToastUtils.createSuccessToast('Hello')
   }, [])
 
   if (userDetails === null || userDetails === undefined) {
