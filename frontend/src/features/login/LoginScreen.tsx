@@ -16,7 +16,7 @@ export function LoginScreen (): JSX.Element {
       ToastUtils.createSuccessToast('Login successful: ' + response.data.status)
     } catch (error: any) {
     // Use a more clear way to check if there is an error message
-      const errorMessage = error.data.message !== undefined ? error.data.message : 'Login failed'
+      const errorMessage = error.message !== undefined ? error.message : 'Login failed'
       ToastUtils.createErrorToast(errorMessage)
     }
   }
