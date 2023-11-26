@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { EntityRequestApi } from '../../api/entity/EntityRequestApi'
 import { type Entity } from '../../models/user/Entity'
 import { ToastUtils } from '../../components/toasts/utils/ToastUtils'
+import { EntityApi } from '../../api/entity/EntityApi'
 
 export function UserDetails (): JSX.Element {
   const [userDetails, setUserDetails] = useState<Entity | null>(null)
 
   async function fetchData (): Promise<void> {
     try {
-      const result = await EntityRequestApi.getEntities() // Todo: Change
+      const result = await EntityApi.getEntities() // Todo: Change
 
       setUserDetails(result.data.data[0])
     } catch (error) {

@@ -28,7 +28,7 @@ const deleteEntityById = async (id: string): Promise<any> => {
   return await RequestTypes.deleteRequest(`/backend/${id}`)
 }
 
-export const EntityRequestApi = {
+export const EntityApi = {
   createNewEntity,
   getEntities,
   getEntityById,
