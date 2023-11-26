@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 
 const info = {
-  name: 'Entity API',
+  name: 'Boilerplate API',
   description: '\r\nThis is the Entity API for the Express boilerplate application. \r\n\r\n',
   schema: 'https://schema.getpostman.com/json/collection/v2.1.0/collection.json'
 }
@@ -18,7 +18,6 @@ async function generateApiEndpoints (): Promise<any> {
     const serviceRouteDir = path.join(rootDirectory, serviceRoot, routeDir)
 
     if (fs.existsSync(serviceRouteDir)) {
-      console.log(303, serviceRouteDir)
       await traverseRouteFile(serviceRouteDir)
     }
   }
@@ -33,9 +32,6 @@ async function traverseRouteFile (routesDirectory: string): Promise<void> {
   const routeFilePaths = fs.readdirSync(routesDirectory)
   for (const routeFilePath of routeFilePaths) {
     const routeFile = path.join(routesDirectory, routeFilePath)
-    console.log(routeFile)
-
-    // Check if the route file exists
     if (fs.existsSync(routeFile)) {
       await generateEndpointObjects(routeFile)
     }
