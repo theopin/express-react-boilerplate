@@ -6,7 +6,7 @@ services:
 
   frontend:
     env_file:
-      - ./frontend/.env
+      - ./frontend/.env.prod
     container_name: frontend
     build: ./frontend
     ports:
@@ -14,7 +14,7 @@ services:
 
   backend:
     env_file:
-      - ./backend/.env
+      - ./backend/.env.prod
     container_name: backend
     build: ./backend
     depends_on:
@@ -22,7 +22,7 @@ services:
 
   user:
     env_file:
-      - ./user/.env
+      - ./user/.env.prod
     container_name: user
     build: ./user
     depends_on:
@@ -30,7 +30,7 @@ services:
 
   auth:
     env_file:
-      - ./auth/.env
+      - ./auth/.env.prod
     container_name: auth
     build: ./auth
     depends_on:
