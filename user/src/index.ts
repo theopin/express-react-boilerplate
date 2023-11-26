@@ -26,7 +26,7 @@ app.options('*', cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-app.use('/', UserRouter)
+app.use('/user/', UserRouter)
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`)

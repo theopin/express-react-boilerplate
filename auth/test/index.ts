@@ -21,4 +21,4 @@ app.set('database', database)
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-app.use('/', EntityRouter)
+app.use('/auth/', EntityRouter)
