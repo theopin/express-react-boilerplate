@@ -14,13 +14,13 @@ export function UserDetails (): JSX.Element {
     } catch (error) {
       // Handle errors here
       console.error('Error fetching data:', error)
-      ToastUtils.createSuccessToast('Hello')
+      ToastUtils.createErrorToast('Hello')
     }
   }
 
   useEffect(() => {
     void fetchData()
-    ToastUtils.createErrorToast('Hello')
+    ToastUtils.createSuccessToast('Hello')
   }, [])
 
   if (userDetails === null || userDetails === undefined) {
