@@ -8,15 +8,15 @@ export function LoginScreen (): JSX.Element {
 
   async function handleLogin (): Promise<void> {
     try {
-    // Simulating a login request
-
       const response = await AuthApi.authenticateUser({ username, password })
 
-      // Handle successful login (e.g., store tokens in localStorage)
-      ToastUtils.createSuccessToast('Login successful:' + response.data)
+      localStorage.setItem('refreshToken', response.data.data.refreshToken)
+      localStorage.setItem('refreshToken', response.data.data.accessToken)
+
+      ToastUtils.createSuccessToast('Login successful: ' + response.data.status)
     } catch (error: any) {
     // Use a more clear way to check if there is an error message
-      const errorMessage = error.message !== undefined ? error.message : 'Login failed'
+      const errorMessage = error.data.message !== undefined ? error.data.message : 'Login failed'
       ToastUtils.createErrorToast(errorMessage)
     }
   }
