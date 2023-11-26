@@ -26,7 +26,7 @@ app.options('*', cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-app.use('/', AuthRouter)
+app.use('/auth/', AuthRouter)
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`)

@@ -1,0 +1,119 @@
+{
+  "name": "Entity API",
+  "description": "\r\nThis is the Entity API for the Express boilerplate application. \r\n\r\n",
+  "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+  "items": [
+    {
+      "name": "get auth",
+      "request": {
+        "method": "GET",
+        "url": "http://{{base_url}}/health"
+      }
+    },
+    {
+      "name": "post auth",
+      "request": {
+        "method": "POST",
+        "url": "http://{{base_url}}/login"
+      }
+    },
+    {
+      "name": "get auth",
+      "request": {
+        "method": "GET",
+        "url": "http://{{base_url}}/access"
+      }
+    },
+    {
+      "name": "get auth",
+      "request": {
+        "method": "GET",
+        "url": "http://{{base_url}}/verify"
+      }
+    },
+    {
+      "name": "get entity",
+      "request": {
+        "method": "GET",
+        "url": "http://{{base_url}}/health"
+      }
+    },
+    {
+      "name": "post entity",
+      "request": {
+        "method": "POST",
+        "url": "http://{{base_url}}/"
+      }
+    },
+    {
+      "name": "get entity",
+      "request": {
+        "method": "GET",
+        "url": "http://{{base_url}}/"
+      }
+    },
+    {
+      "name": "get entity",
+      "request": {
+        "method": "GET",
+        "url": "http://{{base_url}}/:id"
+      }
+    },
+    {
+      "name": "patch entity",
+      "request": {
+        "method": "PATCH",
+        "url": "http://{{base_url}}/:id"
+      }
+    },
+    {
+      "name": "delete entity",
+      "request": {
+        "method": "DELETE",
+        "url": "http://{{base_url}}/:id"
+      }
+    },
+    {
+      "name": "get user",
+      "request": {
+        "method": "GET",
+        "url": "http://{{base_url}}/health"
+      }
+    },
+    {
+      "name": "post user",
+      "request": {
+        "method": "POST",
+        "url": "http://{{base_url}}/"
+      }
+    },
+    {
+      "name": "get user",
+      "request": {
+        "method": "GET",
+        "url": "http://{{base_url}}/"
+      }
+    },
+    {
+      "name": "get user",
+      "request": {
+        "method": "GET",
+        "url": "http://{{base_url}}/:id"
+      }
+    },
+    {
+      "name": "patch user",
+      "request": {
+        "method": "PATCH",
+        "url": "http://{{base_url}}/:id"
+      }
+    },
+    {
+      "name": "delete user",
+      "request": {
+        "method": "DELETE",
+        "url": "http://{{base_url}}/:id"
+      }
+    }
+  ]
+}
