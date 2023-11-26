@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { RequestInterceptor } from './RequestInterceptor'
 
 const BACKEND_ENDPOINT = process.env.REACT_APP_BACKEND_ENDPOINT
 
@@ -6,6 +7,9 @@ const instance = axios.create({
   baseURL: BACKEND_ENDPOINT,
   timeout: 5000
 })
+
+await RequestInterceptor.setRequestInterceptor(instance)
+await RequestInterceptor.setResponseInterceptor(instance)
 
 const postRequest = async (url: string, data = {}): Promise<any> => {
   return await instance.post(url, data)
