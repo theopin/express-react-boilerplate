@@ -10,7 +10,6 @@
     "dev": "npx tsc --watch & nodemon dist/src/index.js",
     "test-debug": "jest --runInBand --detectOpenHandles --verbose",
     "test": "jest --runInBand --detectOpenHandles --silent --verbose",
-    "postman": "ts-node postman/postman.generator.ts",
     "lint": "eslint --ext .ts  .",
     "lint-fix": "eslint --fix . --ext .ts"
   },
