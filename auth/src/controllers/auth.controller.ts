@@ -97,6 +97,7 @@ class AuthController {
       })
     } catch (errorObject: any) {
       const errorResponse = JSON.parse(serverErrorResponse)
+      console.log(202, errorObject)
 
       // console.log('error', (authToken as string).split(' ')[1], errorObject.name, JwtConstants.refresh.expiresIn, 10101010, errorObject.message)
 
@@ -111,7 +112,7 @@ class AuthController {
 
   verifyAccessToken (req: Request, res: Response, next: NextFunction): void {
     const authToken = req.get('Authorization')
-    console.log(authToken)
+
     if (authToken === null || authToken === undefined) {
       throw new JsonWebTokenError('undefined token')
     }
@@ -128,7 +129,7 @@ class AuthController {
       })
     } catch (errorObject: any) {
       const errorResponse = JSON.parse(serverErrorResponse)
-      console.log(101, JSON.stringify(req.headers))
+      console.log(101, errorObject)
 
       // console.log('error', (req.headers.Authorization as string).split(' ')[1], errorObject.name, JwtConstants.refresh.expiresIn, 10101010, errorObject.message)
 

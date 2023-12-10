@@ -10,7 +10,7 @@ export function UserDetails (): JSX.Element {
     try {
       console.log(localStorage.getItem('accessToken'))
       const result = await EntityApi.getEntities() // Todo: Change
-      console.log(JSON.stringify(result))
+      console.log(JSON.stringify(result.data))
       setUserDetails(result.data.data[0])
       ToastUtils.createSuccessToast('Hello')
     } catch (error: any) {
