@@ -6,6 +6,16 @@ services:
     image: mongo:latest
     #ports:
     #- 27017:27017
+  
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    ports:
+      - 5432:5432
+    volumes:
+      - ./data/users.sql:/docker-entrypoint-initdb.d/users.sql
 
   frontend:
     env_file:
@@ -22,6 +32,7 @@ services:
     build: ./backend
     depends_on:
       - mongodb
+      - postgres
 
   user:
     env_file:
@@ -30,6 +41,7 @@ services:
     build: ./user
     depends_on:
       - mongodb
+      - postgres
 
   auth:
     env_file:
@@ -38,6 +50,7 @@ services:
     build: ./auth
     depends_on:
       - mongodb
+      - postgres
 
   gateway:
     build: ./gateway
