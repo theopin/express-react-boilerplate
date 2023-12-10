@@ -33,6 +33,10 @@ class Postgres implements Database {
   }
 
   async getAllEntities (params: Partial<any>): Promise<any> {
+    if (params === null || params === undefined) {
+      return this.db.manyOrNone('SELECT * FROM users')
+    }
+
     const condition = Object.keys(params).map((key, index) => `$${index + 1}:${key}`).join(' AND ')
     const values = Object.values(params)
     return this.db.manyOrNone(`SELECT * FROM users WHERE ${condition}`, values)
