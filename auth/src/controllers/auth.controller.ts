@@ -74,11 +74,13 @@ class AuthController {
   }
 
   obtainAccessToken (req: Request, res: Response, next: NextFunction): void {
-    if (req.headers.authorization === null || req.headers.authorization === undefined) {
+    const authToken = req.get('Authorization')
+    if (authToken === null || authToken === undefined) {
       throw new JsonWebTokenError('undefined token')
     }
+
     try {
-      const refreshToken = req.headers.authorization.split(' ')[1]
+      const refreshToken = (authToken).split(' ')[1]
       const jwtTokenObject: any = authServiceObject.validateJwtToken(refreshToken, JwtConstants.refresh.secret)
 
       if (jwtTokenObject === null || jwtTokenObject === undefined) {
@@ -95,8 +97,9 @@ class AuthController {
       })
     } catch (errorObject: any) {
       const errorResponse = JSON.parse(serverErrorResponse)
+      console.log(202, errorObject)
 
-      console.log('error', req.headers.authorization.split(' ')[1], errorObject.name, JwtConstants.refresh.expiresIn, 10101010, errorObject.message)
+      // console.log('error', (authToken as string).split(' ')[1], errorObject.name, JwtConstants.refresh.expiresIn, 10101010, errorObject.message)
 
       if (errorObject.name === 'TokenExpiredError' || errorObject.name === 'InvalidTokenError' || errorObject.name === 'JsonWebTokenError') {
         errorResponse.statusCode = StatusCode.ClientErrorBadRequest
@@ -108,11 +111,13 @@ class AuthController {
   }
 
   verifyAccessToken (req: Request, res: Response, next: NextFunction): void {
-    if (req.headers.authorization === null || req.headers.authorization === undefined) {
+    const authToken = req.get('Authorization')
+
+    if (authToken === null || authToken === undefined) {
       throw new JsonWebTokenError('undefined token')
     }
     try {
-      const accessToken = req.headers.authorization.split(' ')[1]
+      const accessToken = (authToken).split(' ')[1]
       const jwtTokenObject: any = authServiceObject.validateJwtToken(accessToken, JwtConstants.access.secret)
 
       if (jwtTokenObject === null || jwtTokenObject === undefined) {
@@ -124,8 +129,9 @@ class AuthController {
       })
     } catch (errorObject: any) {
       const errorResponse = JSON.parse(serverErrorResponse)
+      console.log(101, errorObject)
 
-      console.log('error', req.headers.authorization.split(' ')[1], errorObject.name, JwtConstants.refresh.expiresIn, 10101010, errorObject.message)
+      // console.log('error', (req.headers.Authorization as string).split(' ')[1], errorObject.name, JwtConstants.refresh.expiresIn, 10101010, errorObject.message)
 
       if (errorObject.name === 'TokenExpiredError' || errorObject.name === 'InvalidTokenError' || errorObject.name === 'JsonWebTokenError') {
         errorResponse.statusCode = StatusCode.ClientErrorBadRequest
