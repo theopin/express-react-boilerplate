@@ -46,6 +46,8 @@ class MongoDb implements Database {
   }
 
   async getAllEntities (params: Partial<any>): Promise<any> {
+    console.log(params)
+    console.log(await this.ModelObject.find({}).exec())
     return this.ModelObject.find({ params }).exec()
   }
 
