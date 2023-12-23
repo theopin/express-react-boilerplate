@@ -20,7 +20,7 @@ export function SignupScreen (): JSX.Element {
   }
 
   return (
-    <div className="container mt-5">
+    <div>
       <h2 className="mb-4">Signup</h2>
       <form>
         <div className="mb-3">

@@ -8,10 +8,12 @@ import { UserDetails } from './features/entity/UserDetails'
 export function App (): JSX.Element {
   return (
     <div>
-      <div>Hello to Boilerplate</div>
-      <LoginScreen />
-      <SignupScreen />
-      <UserDetails />
+      <div className="container mt-5">
+        <div>Hello to Boilerplate</div>
+        <LoginScreen />
+        <SignupScreen />
+        <UserDetails />
+      </div>
       <ToastContainer />
     </div>
 

@@ -22,7 +22,7 @@ export function LoginScreen (): JSX.Element {
   }
 
   return (
-    <div className="container mt-5">
+    <div >
       <h2 className="mb-4">Login</h2>
       <form>
         <div className="mb-3">
