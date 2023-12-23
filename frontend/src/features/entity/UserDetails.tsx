@@ -31,26 +31,29 @@ export function UserDetails (): JSX.Element {
 
   return (
     <div>
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Username</th>
-          <th scope="col">Email</th>
-        </tr>
-      </thead>
-      <tbody>
-        {
-          userDetails.map((item: Entity, index: number) => {
-            return (
-              <tr key={'UserView ' + index} id={'UserView ' + index}>
-                <td>{index}</td>
-                <td>{item.username}</td>
-                <td>{item.email}</td>
-              </tr>
-            )
-          })
-        }
-      </tbody>
+      <table className="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Username</th>
+            <th scope="col">Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            userDetails.map((item: Entity, index: number) => {
+              return (
+                <tr key={'UserView ' + index} id={'UserView ' + index}>
+                  <td>{index}</td>
+                  <td>{item.username}</td>
+                  <td>{item.email}</td>
+                </tr>
+              )
+            })
+          }
+        </tbody>
+      </table>
     </div>
+
   )
 }
