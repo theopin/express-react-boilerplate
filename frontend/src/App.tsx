@@ -1,17 +1,11 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
-import { ToastContainer } from './components/toasts/container/ToastContainer'
-import { UserDetails } from './features/entity/UserDetails'
-import { WelcomeScreen } from './features/welcome/WelcomeScreen'
+import { MainRouter } from './features/router/MainRouter'
 
 export function App (): JSX.Element {
   return (
-    <div>
-      <div className="container mt-2">
-        <WelcomeScreen />
-        <UserDetails />
-      </div>
-      <ToastContainer />
+    <div className='mt-2 mr-2 ml-2'>
+      <MainRouter />
     </div>
 
   )
