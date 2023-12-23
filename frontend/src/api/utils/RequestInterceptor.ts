@@ -1,4 +1,6 @@
 import { type AxiosResponse, type AxiosInstance } from 'axios'
+import { Buffer } from 'buffer'
+import { useNavigate } from 'react-router-dom'
 
 async function refreshAccessToken (instance: AxiosInstance): Promise<AxiosResponse<any>> {
   try {
@@ -57,21 +59,22 @@ async function setResponseInterceptor (instance: AxiosInstance): Promise<void> {
       if (error.response.status === 401 && (originalRequest._retry === null || originalRequest._retry === undefined)) {
         originalRequest._retry = true
 
-        const refreshToken = localStorage.getItem('r')
+        const refreshToken = localStorage.getItem('refreshToken')
         if (refreshToken !== null && refreshToken !== undefined) {
-          const decodedToken = decodeToken(refreshToken)
-
-          // Refresh token has expired
-          if (decodedToken.exp * 1000 < Date.now()) {
-            localStorage.removeItem('accessToken')
-            localStorage.removeItem('refreshToken')
-
-            // Redirect to login or perform any other action needed
-            window.location.href = '/login'
-            return await Promise.reject(error)
-          }
-
           try {
+            const decodedToken = decodeToken(refreshToken)
+
+            // Refresh token has expired
+            if (decodedToken.exp * 1000 < Date.now()) {
+              localStorage.removeItem('accessToken')
+              localStorage.removeItem('refreshToken')
+
+              // Redirect to login or perform any other action needed
+              const navigate = useNavigate()
+              navigate('/welcome')
+              return await Promise.reject(error)
+            }
+
             const refreshedResponse = await refreshAccessToken(instance)
 
             // Retry the original request with the new access token
@@ -84,6 +87,8 @@ async function setResponseInterceptor (instance: AxiosInstance): Promise<void> {
 
             // Redirect to login or perform any other action needed
             window.location.href = '/login'
+            const navigate = useNavigate()
+            navigate('/welcome')
             return await Promise.reject(refreshError)
           }
         }

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { ToastUtils } from '../../components/toasts/utils/ToastUtils'
 import { AuthApi } from '../../api/auth/AuthApi'
 
-export function LoginScreen (): JSX.Element {
+export function LoginScreen ({ setFormLoginStatus }: { setFormLoginStatus: any }): JSX.Element {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
@@ -15,37 +15,37 @@ export function LoginScreen (): JSX.Element {
 
       ToastUtils.createSuccessToast('Login successful: ' + response.data.status)
     } catch (error: any) {
-    // Use a more clear way to check if there is an error message
+      // Use a more clear way to check if there is an error message
       const errorMessage = error.message !== undefined ? error.message : 'Login failed'
       ToastUtils.createErrorToast(errorMessage)
     }
   }
 
+  function switchToSignup (): void {
+    setFormLoginStatus(false)
+  }
+
   return (
-    <div className="container mt-5">
-      <h2 className="mb-4">Login</h2>
-      <form>
-        <div className="mb-3">
-          <label className="form-label">Username:</label>
-          <input
-            type="text"
-            className="form-control"
-            value={username}
-            onChange={(e) => { setUsername(e.target.value) }}
+    <div >
+      <form >
+        <div className="form-floating mb-3">
+          <input type="text" className="form-control" id="floatingInput" placeholder="name@example.com" value={username} onChange={(e) => { setUsername(e.target.value) }}
           />
+          <label htmlFor="floatingInput">Username</label>
         </div>
-        <div className="mb-3">
-          <label className="form-label">Password:</label>
-          <input
-            type="password"
-            className="form-control"
-            value={password}
-            onChange={(e) => { setPassword(e.target.value) }}
+        <div className="form-floating mb-3">
+          <input type="password" className="form-control" id="floatingPassword" placeholder="Password" value={password} onChange={(e) => { setPassword(e.target.value) }}
           />
+          <label htmlFor="floatingPassword">Password</label>
         </div>
-        <button type="button" className="btn btn-primary" onClick={() => { void handleLogin() }}>
-          Login
-        </button>
+        <div className="checkbox mb-3">
+          <label>
+            <input type="checkbox" value="remember-me" /> Remember me
+          </label>
+        </div>
+        <button type="button" className="w-100 btn btn-lg btn-primary" onClick={() => { void handleLogin() }} >Login</button>
+        <hr className="my-4" />
+        <button type="button" className="mx-auto d-block w-80 btn btn-lg btn-success" onClick={() => { switchToSignup() }} >Create New Account</button>
       </form>
     </div>
   )
