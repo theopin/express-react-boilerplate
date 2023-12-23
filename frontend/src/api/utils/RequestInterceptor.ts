@@ -1,5 +1,6 @@
 import { type AxiosResponse, type AxiosInstance } from 'axios'
 import { Buffer } from 'buffer'
+import { useNavigate } from 'react-router-dom'
 
 async function refreshAccessToken (instance: AxiosInstance): Promise<AxiosResponse<any>> {
   try {
@@ -69,7 +70,8 @@ async function setResponseInterceptor (instance: AxiosInstance): Promise<void> {
               localStorage.removeItem('refreshToken')
 
               // Redirect to login or perform any other action needed
-              window.location.href = '/login'
+              const navigate = useNavigate()
+              navigate('/welcome')
               return await Promise.reject(error)
             }
 
@@ -85,6 +87,8 @@ async function setResponseInterceptor (instance: AxiosInstance): Promise<void> {
 
             // Redirect to login or perform any other action needed
             window.location.href = '/login'
+            const navigate = useNavigate()
+            navigate('/welcome')
             return await Promise.reject(refreshError)
           }
         }
