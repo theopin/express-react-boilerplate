@@ -27,7 +27,7 @@ export function LoginScreen ({ setFormLoginStatus }: { setFormLoginStatus: any }
 
   return (
     <div >
-      <form className="p-4 p-md-5 border rounded-3 bg-body-tertiary">
+      <form >
         <div className="form-floating mb-3">
           <input type="text" className="form-control" id="floatingInput" placeholder="name@example.com" value={username} onChange={(e) => { setUsername(e.target.value) }}
           />
