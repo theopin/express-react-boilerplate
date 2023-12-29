@@ -26,7 +26,7 @@ export function UserDetails (): JSX.Element {
   }, [sortOrder, searchTerm])
 
   if (userDetails === null || userDetails === undefined || userDetails.length === 0) {
-    return (<div>Error! User Not found</div>)
+    return (<div></div>)
   }
 
   console.log(userDetails)

@@ -34,13 +34,11 @@ export function MainRouter (): JSX.Element {
 
   function decodeToken (jwtToken: string): any {
     const payloadBase64 = jwtToken.split('.')[1]
-    console.log(payloadBase64)
     // Decode the base64-encoded payload
     const payloadJson = Buffer.from(payloadBase64, 'base64').toString('utf-8')
 
     return JSON.parse(payloadJson)
   }
-  console.log(isRefreshTokenValid())
 
   return (
     <div>
@@ -49,7 +47,7 @@ export function MainRouter (): JSX.Element {
         <Routes>
           <Route path='/dashboard' element={isRefreshTokenValid() ? <Dashboard /> : <Navigate to="/welcome" />} />
           <Route path='/welcome' element={isRefreshTokenValid() ? <Navigate to="/dashboard" /> : <WelcomeScreen />}/>
-          <Route path='/' element={<Navigate to={isRefreshTokenValid() ? '/home' : '/welcome'} />} />
+          <Route path='/' element={<Navigate to={isRefreshTokenValid() ? '/dashboard' : '/welcome'} />} />
         </Routes>
       </Router>
     </div>
