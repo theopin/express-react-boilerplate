@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { ToastUtils } from '../../components/toasts/utils/ToastUtils'
 import { AuthApi } from '../../api/auth/AuthApi'
+import { useNavigate } from 'react-router-dom'
 
 export function LoginScreen ({ setFormLoginStatus }: { setFormLoginStatus: any }): JSX.Element {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const navigate = useNavigate()
 
   async function handleLogin (): Promise<void> {
     try {
@@ -13,7 +15,8 @@ export function LoginScreen ({ setFormLoginStatus }: { setFormLoginStatus: any }
       localStorage.setItem('refreshToken', response.data.data.refreshToken)
       localStorage.setItem('accessToken', response.data.data.accessToken)
 
-      ToastUtils.createSuccessToast('Login successful: ' + response.data.status)
+      navigate('/dashboard')
+      window.location.reload()
     } catch (error: any) {
       // Use a more clear way to check if there is an error message
       const errorMessage = error.message !== undefined ? error.message : 'Login failed'
@@ -45,7 +48,7 @@ export function LoginScreen ({ setFormLoginStatus }: { setFormLoginStatus: any }
         </div>
         <button type="button" className="w-100 btn btn-lg btn-primary" onClick={() => { void handleLogin() }} >Login</button>
         <hr className="my-4" />
-        <button type="button" className="mx-auto d-block w-80 btn btn-lg btn-success" onClick={() => { switchToSignup() }} >Create New Account</button>
+        <button type="button" className="mx-auto d-block w-80 btn btn-lg btn-success" onClick={() => { switchToSignup(); navigate('/dashboard') }} >Create New Account</button>
       </form>
     </div>
   )

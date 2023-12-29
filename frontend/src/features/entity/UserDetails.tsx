@@ -5,6 +5,8 @@ import { type Entity } from '../../models/user/Entity'
 
 export function UserDetails (): JSX.Element {
   const [userDetails, setUserDetails] = useState<Entity[] | null>(null)
+  const [sortOrder, setSortOrder] = useState('asc')
+  const [searchTerm, setSearchTerm] = useState('')
 
   async function fetchData (): Promise<void> {
     try {
@@ -21,22 +23,32 @@ export function UserDetails (): JSX.Element {
 
   useEffect(() => {
     void fetchData()
-  }, [])
+  }, [sortOrder, searchTerm])
 
   if (userDetails === null || userDetails === undefined || userDetails.length === 0) {
-    return (<div>Error! User Not found</div>)
+    return (<div></div>)
   }
 
   console.log(userDetails)
 
   return (
     <div>
+      <input
+        type="text"
+        placeholder="Search..."
+        value={searchTerm}
+        onChange={(e) => { setSearchTerm(e.target.value) }}
+      />
       <table className="table">
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Username</th>
-            <th scope="col">Email</th>
+            <th scope="col" onClick={() => { setSortOrder('desc') }}>
+              Username {sortOrder === 'asc' ? '▲' : '▼'}
+            </th>
+            <th scope="col" onClick={() => { setSortOrder('desc') }}>
+              Email {sortOrder === 'asc' ? '▲' : '▼'}
+            </th>
           </tr>
         </thead>
         <tbody>

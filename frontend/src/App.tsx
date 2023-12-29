@@ -4,7 +4,7 @@ import { MainRouter } from './features/router/MainRouter'
 
 export function App (): JSX.Element {
   return (
-    <div className='pe-5 ps-5'>
+    <div>
       <MainRouter />
     </div>
 
