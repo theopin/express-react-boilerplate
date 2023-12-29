@@ -14,8 +14,7 @@ export function Sidebar (): JSX.Element {
   return (
         <div>
             <div className="offcanvas-md offcanvas-end bg-body-tertiary" tabIndex={-1} id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
-                <div className="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
-                    <ul className="nav flex-column">
+                    <ul className="nav flex-column mt-3">
                         <li className="nav-item">
                             <a className="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="/dashboard">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-house-fill" viewBox="0 0 16 16">
@@ -80,8 +79,6 @@ export function Sidebar (): JSX.Element {
                             </a>
                         </li>
                     </ul>
-
-                </div>
             </div>
         </div>
   )
