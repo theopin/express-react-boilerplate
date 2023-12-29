@@ -2,9 +2,9 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
 import { Buffer } from 'buffer'
 
-import { UserDetails } from '../entity/UserDetails'
 import { WelcomeScreen } from '../welcome/WelcomeScreen'
 import { ToastContainer } from '../../components/toasts/container/ToastContainer'
+import { Dashboard } from '../dashboard/Dashboard'
 
 export function MainRouter (): JSX.Element {
   const isRefreshTokenValid = (): boolean => {
@@ -47,8 +47,8 @@ export function MainRouter (): JSX.Element {
       <ToastContainer />
       <Router>
         <Routes>
-          <Route path='/dashboard' element={isRefreshTokenValid() ? <UserDetails /> : <Navigate to="/welcome" />} />
-          <Route path='/welcome' element={isRefreshTokenValid() ? <Navigate to="/home" /> : <WelcomeScreen />}/>
+          <Route path='/dashboard' element={isRefreshTokenValid() ? <Dashboard /> : <Navigate to="/welcome" />} />
+          <Route path='/welcome' element={isRefreshTokenValid() ? <Navigate to="/dashboard" /> : <WelcomeScreen />}/>
           <Route path='/' element={<Navigate to={isRefreshTokenValid() ? '/home' : '/welcome'} />} />
         </Routes>
       </Router>
