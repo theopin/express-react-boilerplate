@@ -1,17 +1,17 @@
-name: Continuous Integration Workflow - Backend
+name: Continuous Integration Workflow - Product
 on:
   pull_request:
     branches:
       - main # Run the workflow only on pull requests to the main branch
     paths:
-      - 'backend/**' # Workflow triggered on changes to code within express directory
-      - '.github/workflows/backend_ci.yml'
+      - 'product/**' # Workflow triggered on changes to code within express directory
+      - '.github/workflows/product_ci.yml'
 
 jobs:
   test:
     defaults:
         run:
-            working-directory: ./backend
+            working-directory: ./product
 
     runs-on: ubuntu-latest
     strategy:
