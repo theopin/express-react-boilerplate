@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { ToastUtils } from '../../components/toasts/utils/ToastUtils'
-import { EntityApi } from '../../api/entity/EntityApi'
-import { type Entity } from '../../models/user/Entity'
+import { ProductApi } from '../../api/product/ProductApi'
+import { type Product } from '../../models/product/Product'
 
-export function UserDetails (): JSX.Element {
-  const [userDetails, setUserDetails] = useState<Entity[] | null>(null)
+export function ProductDetails (): JSX.Element {
+  const [userDetails, setUserDetails] = useState<Product[] | null>(null)
   const [sortOrder, setSortOrder] = useState('asc')
   const [searchTerm, setSearchTerm] = useState('')
 
   async function fetchData (): Promise<void> {
     try {
       console.log(localStorage.getItem('accessToken'))
-      const result = await EntityApi.getEntities() // Todo: Change
+      const result = await ProductApi.getProducts() // Todo: Change
       setUserDetails(result.data.data)
       ToastUtils.createSuccessToast('Hello')
     } catch (error: any) {
@@ -53,7 +53,7 @@ export function UserDetails (): JSX.Element {
         </thead>
         <tbody>
           {
-            userDetails.map((item: Entity, index: number) => {
+            userDetails.map((item: Product, index: number) => {
               return (
                 <tr key={'UserView ' + index} id={'UserView ' + index}>
                   <td>{index}</td>
