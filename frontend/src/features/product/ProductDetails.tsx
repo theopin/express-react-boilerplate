@@ -44,10 +44,10 @@ export function ProductDetails (): JSX.Element {
           <tr>
             <th scope="col">#</th>
             <th scope="col" onClick={() => { setSortOrder('desc') }}>
-              Username {sortOrder === 'asc' ? '▲' : '▼'}
+              Name {sortOrder === 'asc' ? '▲' : '▼'}
             </th>
             <th scope="col" onClick={() => { setSortOrder('desc') }}>
-              Email {sortOrder === 'asc' ? '▲' : '▼'}
+              Quantity {sortOrder === 'asc' ? '▲' : '▼'}
             </th>
           </tr>
         </thead>
@@ -57,8 +57,8 @@ export function ProductDetails (): JSX.Element {
               return (
                 <tr key={'UserView ' + index} id={'UserView ' + index}>
                   <td>{index}</td>
-                  <td>{item.username}</td>
-                  <td>{item.email}</td>
+                  <td>{item.name}</td>
+                  <td>{item.quantity}</td>
                 </tr>
               )
             })

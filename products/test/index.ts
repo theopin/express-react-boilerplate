@@ -22,4 +22,4 @@ app.set('database', database)
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-app.use('/backend/', EntityRouter)
+app.use('/product/', EntityRouter)

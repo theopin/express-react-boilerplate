@@ -10,22 +10,12 @@ Recommended:
 
 */
 
-const entityModelName = 'Entity'
+const entityModelName = 'Product'
 const entitySchema = new Schema({
-  email: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  username: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  password: {
-    type: String,
-    required: true
-  }
+  name: { type: String, required: true },
+  description: { type: String, required: false },
+  price: { type: Number, required: true },
+  quantity: { type: Number, required: true }
 })
 
 export { entitySchema, entityModelName }
