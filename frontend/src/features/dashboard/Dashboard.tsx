@@ -1,7 +1,7 @@
 import React from 'react'
 import { Header } from './header/Header'
 import { Sidebar } from './sidebar/Sidebar'
-import { UserDetails } from '../entity/UserDetails'
+import { ProductDetails } from '../product/ProductDetails'
 
 export function Dashboard (): JSX.Element {
   return (
@@ -13,7 +13,7 @@ export function Dashboard (): JSX.Element {
                         <Sidebar />
                     </div>
                     <div className="col-md-10 ms-sm-auto col-lg-10 px-md-4 h-100">
-                        <UserDetails />
+                        <ProductDetails />
                     </div>
                 </div>
             </div>

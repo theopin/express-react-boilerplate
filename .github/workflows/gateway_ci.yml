@@ -44,12 +44,12 @@ jobs:
           file_name: .env.prod
           fail_on_empty: true         
 
-      - name: Create env for backend service
+      - name: Create env for product service
         uses: SpicyPizza/create-envfile@v1.3
         with:
           envkey_DATABASE_TYPE: ${{ secrets.DATABASE_TYPE }}
           envkey_DATABASE_CONNECTION_URL: ${{ secrets.DATABASE_CONNECTION_URL }}
-          directory: ./backend
+          directory: ./product
           file_name: .env.prod
           fail_on_empty: true 
 

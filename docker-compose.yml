@@ -25,11 +25,11 @@ services:
     ports:
       - 80:80
 
-  backend:
+  product:
     env_file:
-      - ./backend/.env.prod
-    container_name: backend
-    build: ./backend
+      - ./product/.env.prod
+    container_name: product
+    build: ./product
     depends_on:
       - mongodb
       - postgres
@@ -56,7 +56,7 @@ services:
     build: ./gateway
     container_name: gateway
     depends_on:
-      - backend
+      - product
       - user
       - auth
     ports:
