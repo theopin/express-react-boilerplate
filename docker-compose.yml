@@ -28,7 +28,7 @@ services:
   product:
     env_file:
       - ./product/.env.prod
-    container_name: backend
+    container_name: product
     build: ./product
     depends_on:
       - mongodb

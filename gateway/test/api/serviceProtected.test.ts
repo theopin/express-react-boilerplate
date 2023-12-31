@@ -8,7 +8,7 @@ const baseEndpoint = 'http://localhost:8080'
 const sampleAccessToken = jwt.sign({ username: 'tom' }, JwtConstants.access.secret, { expiresIn: JwtConstants.access.expiresIn })
 console.log(sampleAccessToken)
 
-describe('GET /backend', () => {
+describe('GET /product', () => {
   test('returns status code 200 if it is able to redirect to the backend protected endpoint with valid access token', async () => {
     const res: any = await request(baseEndpoint + '/product')
       .get('/')
