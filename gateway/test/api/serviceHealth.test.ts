@@ -19,7 +19,7 @@ describe('GET /health', () => {
   })
 
   test('returns status code 200 if it is able to redirect to the backend health endpoint', async () => {
-    const res: any = await request(baseEndpoint + '/backend')
+    const res: any = await request(baseEndpoint + '/product')
       .get('/health')
 
     expect(res.statusCode).toEqual(StatusCode.SuccessOK)
