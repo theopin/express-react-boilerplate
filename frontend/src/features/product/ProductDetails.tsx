@@ -33,8 +33,9 @@ export function ProductDetails (): JSX.Element {
   console.log(userDetails)
 
   return (
-    <div>
+    <div className="p-4">
       <CreateProduct />
+      <br/>
       <input
         type="text"
         placeholder="Search..."
