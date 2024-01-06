@@ -5,6 +5,7 @@ import { Buffer } from 'buffer'
 import { WelcomeScreen } from '../welcome/WelcomeScreen'
 import { ToastContainer } from '../../components/toasts/container/ToastContainer'
 import { Dashboard } from '../dashboard/Dashboard'
+import { ProductDetails } from '../product/ProductDetails'
 
 export function MainRouter (): JSX.Element {
   const isRefreshTokenValid = (): boolean => {
@@ -46,6 +47,7 @@ export function MainRouter (): JSX.Element {
       <Router>
         <Routes>
           <Route path='/dashboard' element={isRefreshTokenValid() ? <Dashboard /> : <Navigate to="/welcome" />} />
+          <Route path='/products' element={isRefreshTokenValid() ? <ProductDetails /> : <Navigate to="/welcome" />} />
           <Route path='/welcome' element={isRefreshTokenValid() ? <Navigate to="/dashboard" /> : <WelcomeScreen />}/>
           <Route path='/' element={<Navigate to={isRefreshTokenValid() ? '/dashboard' : '/welcome'} />} />
         </Routes>

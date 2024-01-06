@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { ToastUtils } from '../../components/toasts/utils/ToastUtils'
 import { ProductApi } from '../../api/product/ProductApi'
 import { type Product } from '../../models/product/Product'
+import { CreateProduct } from './CreateProduct'
 
 export function ProductDetails (): JSX.Element {
   const [userDetails, setUserDetails] = useState<Product[] | null>(null)
@@ -33,6 +34,7 @@ export function ProductDetails (): JSX.Element {
 
   return (
     <div>
+      <CreateProduct />
       <input
         type="text"
         placeholder="Search..."
