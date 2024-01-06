@@ -21,10 +21,10 @@ database.connect()
 app.set('database', database)
 
 app.use(cors()) // config cors so that front-end can use
-app.options('*', cors())
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.options('*', cors())
 
 app.use('/auth/', AuthRouter)
 
