@@ -19,14 +19,13 @@ database.connect()
     console.log(error)
   })
 app.set('database', database)
+app.use(express.urlencoded({ extended: true }))
 
 app.use(cors()) // config cors so that front-end can use
-
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
 app.options('*', cors())
 
 app.use('/auth/', AuthRouter)
+app.use(express.json())
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`)

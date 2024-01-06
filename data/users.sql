@@ -36,7 +36,7 @@ create table entities (
 );
 
 create table products (
-    _id varchar(24) PRIMARY KEY,
+    _id varchar(24) NOT NULL DEFAULT generate_object_id(),
     name VARCHAR(255) NOT NULL,
     description TEXT,
     price DECIMAL(10, 2) NOT NULL,
