@@ -1,22 +1,20 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { ToastUtils } from '../../components/toasts/utils/ToastUtils'
 import { AuthApi } from '../../api/auth/AuthApi'
 import { useNavigate } from 'react-router-dom'
 
 export function LoginScreen ({ setFormLoginStatus }: { setFormLoginStatus: any }): JSX.Element {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
   const navigate = useNavigate()
 
-  async function handleLogin (): Promise<void> {
+  async function handleLogin (event: any): Promise<void> {
     try {
-      const response = await AuthApi.authenticateUser({ username, password })
+      const formData = new FormData(event.target)
+      const response = await AuthApi.authenticateUser(formData)
 
       localStorage.setItem('refreshToken', response.data.data.refreshToken)
       localStorage.setItem('accessToken', response.data.data.accessToken)
 
       navigate('/dashboard')
-      window.location.reload()
     } catch (error: any) {
       // Use a more clear way to check if there is an error message
       const errorMessage = error.message !== undefined ? error.message : 'Login failed'
@@ -30,14 +28,14 @@ export function LoginScreen ({ setFormLoginStatus }: { setFormLoginStatus: any }
 
   return (
     <div >
-      <form >
+      <form onSubmit={(e) => { void handleLogin(e) }}>
         <div className="form-floating mb-3">
-          <input type="text" className="form-control" id="floatingInput" placeholder="name@example.com" value={username} onChange={(e) => { setUsername(e.target.value) }}
+          <input type="text" className="form-control" id="floatingInput" placeholder="name@example.com" name="username"
           />
           <label htmlFor="floatingInput">Username</label>
         </div>
         <div className="form-floating mb-3">
-          <input type="password" className="form-control" id="floatingPassword" placeholder="Password" value={password} onChange={(e) => { setPassword(e.target.value) }}
+          <input type="password" className="form-control" id="floatingPassword" placeholder="Password" name="password"
           />
           <label htmlFor="floatingPassword">Password</label>
         </div>
@@ -46,7 +44,7 @@ export function LoginScreen ({ setFormLoginStatus }: { setFormLoginStatus: any }
             <input type="checkbox" value="remember-me" /> Remember me
           </label>
         </div>
-        <button type="button" className="w-100 btn btn-lg btn-primary" onClick={() => { void handleLogin() }} >Login</button>
+        <button type="submit" className="w-100 btn btn-lg btn-primary">Login</button>
         <hr className="my-4" />
         <button type="button" className="mx-auto d-block w-80 btn btn-lg btn-success" onClick={() => { switchToSignup(); navigate('/welcome') }} >Create New Account</button>
       </form>

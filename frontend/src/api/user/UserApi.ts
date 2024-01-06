@@ -1,8 +1,7 @@
-import { type User } from '../../models/user/User'
 import { type UserFilter } from '../../models/user/UserFilter'
 import { RequestTypes } from '../utils/RequestTypes'
 
-const createNewUser = async (entityDetails: User): Promise<any> => {
+const createNewUser = async (entityDetails: any): Promise<any> => {
   return await RequestTypes.postRequest('/user/', entityDetails)
 }
 
@@ -20,7 +19,7 @@ const getUsersByFilter = async (filterParams: UserFilter): Promise<any> => {
   })
 }
 
-const updateUserById = async (id: string, updatedDetails: UserFilter): Promise<any> => {
+const updateUserById = async (id: string, updatedDetails: any): Promise<any> => {
   return await RequestTypes.patchRequest(`/user/${id}`, updatedDetails)
 }
 
