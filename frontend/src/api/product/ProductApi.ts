@@ -1,8 +1,7 @@
-import { type Product } from '../../models/product/Product'
 import { type ProductFilter } from '../../models/product/ProductFilter'
 import { RequestTypes } from '../utils/RequestTypes'
 
-const createNewProduct = async (entityDetails: Product): Promise<any> => {
+const createNewProduct = async (entityDetails: any): Promise<any> => {
   return await RequestTypes.postRequest('/product/', entityDetails)
 }
 
@@ -20,7 +19,7 @@ const getProductsByFilter = async (filterParams: ProductFilter): Promise<any> =>
   })
 }
 
-const updateProductById = async (id: string, updatedDetails: ProductFilter): Promise<any> => {
+const updateProductById = async (id: string, updatedDetails: any): Promise<any> => {
   return await RequestTypes.patchRequest(`/product/${id}`, updatedDetails)
 }
 

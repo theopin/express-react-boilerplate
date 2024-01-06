@@ -14,7 +14,7 @@ export function CreateProduct (): JSX.Element {
     console.log(formObjectRequest)
 
     try {
-      const response = await ProductApi.createNewProduct(formObjectRequest)
+      const response = await ProductApi.createNewProduct(formData)
       ToastUtils.createSuccessToast('Able to create new Product ' + response.data.status)
       navigate('/dashboard')
     } catch (error: any) {
