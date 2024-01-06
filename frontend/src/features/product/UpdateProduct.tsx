@@ -3,19 +3,22 @@ import { ProductApi } from '../../api/product/ProductApi'
 import { ToastUtils } from '../../components/toasts/utils/ToastUtils'
 import { useNavigate } from 'react-router-dom'
 
-export function CreateProduct (): JSX.Element {
+export function UpdateProduct (): JSX.Element {
   const navigate = useNavigate()
   async function handleCreateNewProduct (event: any): Promise<void> {
     event.preventDefault()
 
     const formData = new FormData(event.target)
+
+    const objectId: any = formData.get('_id')
     const formObjectRequest: any = Object.fromEntries(formData)
-    console.log(formData)
+
+    console.log(objectId)
     console.log(formObjectRequest)
 
     try {
-      const response = await ProductApi.createNewProduct(formObjectRequest)
-      ToastUtils.createSuccessToast('Able to create new Product ' + response.data.status)
+      const response = await ProductApi.updateProductById(objectId, formObjectRequest)
+      ToastUtils.createSuccessToast('Able to update Product ' + response.data.status)
       navigate('/dashboard')
     } catch (error: any) {
       const errorMessage = error.message !== undefined ? error.message : 'Failed to create product'
@@ -27,7 +30,7 @@ export function CreateProduct (): JSX.Element {
             <form className="row g-3" onSubmit={(e) => { void handleCreateNewProduct(e) }}>
                 <div className='row d-flex justify-content-evenly'>
                     <div className="col-md-4">
-                        <div className='fw-bold'>Create New Product</div>
+                        <div className='fw-bold'>Update New Product</div>
                     </div>
                 </div>
 
