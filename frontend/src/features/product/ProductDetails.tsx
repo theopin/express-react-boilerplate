@@ -11,7 +11,6 @@ export function ProductDetails (): JSX.Element {
 
   async function fetchData (): Promise<void> {
     try {
-      console.log(localStorage.getItem('accessToken'))
       const result = await ProductApi.getProducts() // Todo: Change
       setUserDetails(result.data.data)
       ToastUtils.createSuccessToast('Hello')
@@ -29,8 +28,6 @@ export function ProductDetails (): JSX.Element {
   if (userDetails === null || userDetails === undefined || userDetails.length === 0) {
     return (<div></div>)
   }
-
-  console.log(userDetails)
 
   return (
     <div className="p-4">
