@@ -10,7 +10,7 @@ Recommended:
 
 */
 
-const entityModelName = 'Product'
+const entityModelName = 'Products'
 const entitySchema = new Schema({
   name: { type: String, required: true },
   description: { type: String, required: false },

@@ -23,7 +23,7 @@ class Postgres implements Database {
   /* eslint-disable no-template-curly-in-string */
 
   async createEntity (data: any): Promise<any> {
-    const columns = Object.keys(entitySchema.obj)
+    const columns = entitySchema.obj !== undefined ? Object.keys(entitySchema.obj) : []
     const values = columns.map((column) => data[column])
 
     const result = await this.db.one(
@@ -39,7 +39,7 @@ class Postgres implements Database {
   }
 
   async getAllEntities (params: Partial<any>): Promise<any> {
-    if (params === null) {
+    if (params === null || params === undefined) {
       return this.db.manyOrNone(`SELECT * FROM ${entityModelName}`)
     }
 

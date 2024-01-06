@@ -48,7 +48,7 @@ export function LoginScreen ({ setFormLoginStatus }: { setFormLoginStatus: any }
         </div>
         <button type="button" className="w-100 btn btn-lg btn-primary" onClick={() => { void handleLogin() }} >Login</button>
         <hr className="my-4" />
-        <button type="button" className="mx-auto d-block w-80 btn btn-lg btn-success" onClick={() => { switchToSignup(); navigate('/dashboard') }} >Create New Account</button>
+        <button type="button" className="mx-auto d-block w-80 btn btn-lg btn-success" onClick={() => { switchToSignup(); navigate('/welcome') }} >Create New Account</button>
       </form>
     </div>
   )
