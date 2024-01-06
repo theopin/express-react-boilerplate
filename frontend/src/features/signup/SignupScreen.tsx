@@ -5,6 +5,7 @@ import { UserApi } from '../../api/user/UserApi'
 export function SignupScreen ({ setFormLoginStatus }: { setFormLoginStatus: any }): JSX.Element {
   async function handleSignup (event: any): Promise<void> {
     try {
+      event.preventDefault()
       const formData = new FormData(event.target)
       const response = await UserApi.createNewUser(formData)
 

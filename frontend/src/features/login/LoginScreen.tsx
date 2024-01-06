@@ -8,6 +8,7 @@ export function LoginScreen ({ setFormLoginStatus }: { setFormLoginStatus: any }
 
   async function handleLogin (event: any): Promise<void> {
     try {
+      event.preventDefault()
       const formData = new FormData(event.target)
       const response = await AuthApi.authenticateUser(formData)
 
