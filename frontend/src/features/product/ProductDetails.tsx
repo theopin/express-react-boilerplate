@@ -5,14 +5,14 @@ import { type Product } from '../../models/product/Product'
 import { Link } from 'react-router-dom'
 
 export function ProductDetails (): JSX.Element {
-  const [userDetails, setUserDetails] = useState<Product[] | null>(null)
+  const [productDetails, setProductDetails] = useState<Product[] | null>(null)
   const [sortOrder, setSortOrder] = useState('asc')
   // const [searchTerm, setSearchTerm] = useState('')
 
   async function fetchData (): Promise<void> {
     try {
       const result = await ProductApi.getProducts() // Todo: Change
-      setUserDetails(result.data.data)
+      setProductDetails(result.data.data)
       ToastUtils.createSuccessToast('Fetched data successfully')
     } catch (error: any) {
       // Handle errors here
@@ -25,7 +25,7 @@ export function ProductDetails (): JSX.Element {
     void fetchData()
   }, [sortOrder])
 
-  if (userDetails === null || userDetails === undefined || userDetails.length === 0) {
+  if (productDetails === null || productDetails === undefined || productDetails.length === 0) {
     return (<div></div>)
   }
 
@@ -74,7 +74,7 @@ export function ProductDetails (): JSX.Element {
         </thead>
         <tbody>
           {
-            userDetails.map((item: Product, index: number) => {
+            productDetails.map((item: Product, index: number) => {
               return (
                 <tr key={'UserView ' + index} id={'UserView ' + index}>
                   <td>{index}</td>

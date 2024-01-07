@@ -9,7 +9,7 @@ const getProducts = async (): Promise<any> => {
   return await RequestTypes.getRequest('/product/')
 }
 
-const getProductById = async (entityId: number): Promise<any> => {
+const getProductById = async (entityId: any): Promise<any> => {
   return await RequestTypes.getRequest(`/product/${entityId}`)
 }
 
@@ -19,11 +19,11 @@ const getProductsByFilter = async (filterParams: ProductFilter): Promise<any> =>
   })
 }
 
-const updateProductById = async (id: string, updatedDetails: any): Promise<any> => {
+const updateProductById = async (id: any, updatedDetails: any): Promise<any> => {
   return await RequestTypes.patchRequest(`/product/${id}`, updatedDetails)
 }
 
-const deleteProductById = async (id: string): Promise<any> => {
+const deleteProductById = async (id: any): Promise<any> => {
   return await RequestTypes.deleteRequest(`/product/${id}`)
 }
 
