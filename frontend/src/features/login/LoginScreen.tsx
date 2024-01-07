@@ -8,6 +8,7 @@ export function LoginScreen ({ setFormLoginStatus }: { setFormLoginStatus: any }
 
   async function handleLogin (event: any): Promise<void> {
     try {
+      event.preventDefault()
       const formData = new FormData(event.target)
       const formObjectRequest: any = Object.fromEntries(formData)
       const response = await AuthApi.authenticateUser(formObjectRequest)
@@ -18,6 +19,7 @@ export function LoginScreen ({ setFormLoginStatus }: { setFormLoginStatus: any }
       ToastUtils.createSuccessToast('Login Successful!')
 
       navigate('/dashboard')
+      window.location.reload()
     } catch (error: any) {
       // Use a more clear way to check if there is an error message
       const errorMessage = error.message !== undefined ? error.message : 'Login failed'
