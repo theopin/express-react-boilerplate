@@ -48,11 +48,12 @@ export function UpdateProduct (): JSX.Element {
   }
 
   return (
-        <div>
+        <div className="p-4">
+            <div className="d-flex justify-content-center">
+                <div className='fw-bold'>Update Product</div>
+            </div>
+
             <form className="row g-3" onSubmit={(e) => { void handleCreateNewProduct(e) }}>
-                <div className="d-flex justify-content-center">
-                    <div className='fw-bold'>Update Product</div>
-                </div>
 
                 <div className='row g-3 d-flex justify-content-evenly'>
                     <div className="col-md-4">
@@ -111,7 +112,7 @@ export function UpdateProduct (): JSX.Element {
                 <div className='row g-3 d-flex justify-content-evenly'>
                         <div className="col-md-2">
                             <Link to={'/products'}>
-                                <button type="button" className="btn btn-danger" >Cancel Submission</button>
+                                <button type="button" className="btn btn-secondary" >Cancel Submission</button>
                             </Link>
                         </div>
                         <div className="col-md-2">

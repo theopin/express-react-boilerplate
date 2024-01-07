@@ -3,6 +3,7 @@ import { ToastUtils } from '../../components/toasts/utils/ToastUtils'
 import { ProductApi } from '../../api/product/ProductApi'
 import { type Product } from '../../models/product/Product'
 import { Link } from 'react-router-dom'
+import { DeleteProduct } from './DeleteProduct'
 
 export function ProductDetails (): JSX.Element {
   const [productDetails, setProductDetails] = useState<Product[] | null>(null)
@@ -76,7 +77,7 @@ export function ProductDetails (): JSX.Element {
           {
             productDetails.map((item: Product, index: number) => {
               return (
-                <tr key={'UserView ' + index} id={'UserView ' + index}>
+                <tr key={'ProductView ' + index} id={'ProductView ' + index}>
                   <td>{index}</td>
                   <td>{item.name}</td>
                   <td>{item.quantity}</td>
@@ -87,7 +88,7 @@ export function ProductDetails (): JSX.Element {
                       </button>
                     </Link>
                   </td>
-                  <td><button type="button" className="btn btn-danger" >Delete</button></td>
+                  <td><DeleteProduct objectId={item._id} objectName={item.name}/></td>
                 </tr>
               )
             })

@@ -23,7 +23,7 @@ export function CreateProduct (): JSX.Element {
     }
   }
   return (
-        <div>
+        <div className="p-4">
             <form className="row g-3" onSubmit={(e) => { void handleCreateNewProduct(e) }}>
                 <div className="d-flex justify-content-center">
                     <div className='fw-bold'>Create New Product</div>
@@ -84,7 +84,7 @@ export function CreateProduct (): JSX.Element {
                 <div className='row g-3 d-flex justify-content-evenly'>
                         <div className="col-md-2">
                             <Link to={'/products'}>
-                                <button type="button" className="btn btn-danger" >Cancel Submission</button>
+                                <button type="button" className="btn btn-secondary" >Cancel Submission</button>
                             </Link>
                         </div>
                         <div className="col-md-2">
