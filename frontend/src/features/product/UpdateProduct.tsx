@@ -36,7 +36,8 @@ export function UpdateProduct (): JSX.Element {
     try {
       const response = await ProductApi.updateProductById(objectId, formObjectRequest)
       ToastUtils.createSuccessToast(`Updated Product ${objectId} - ${response.data.status}`)
-      navigate('/dashboard')
+      navigate('/products')
+      window.location.reload()
     } catch (error: any) {
       const errorMessage = error.message !== undefined ? error.message : 'Failed to create product'
       ToastUtils.createErrorToast(errorMessage)
