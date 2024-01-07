@@ -1,15 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { ToastUtils } from '../../components/toasts/utils/ToastUtils'
 import { UserApi } from '../../api/user/UserApi'
 
 export function SignupScreen ({ setFormLoginStatus }: { setFormLoginStatus: any }): JSX.Element {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [email, setEmail] = useState('')
-
-  async function handleSignup (): Promise<void> {
+  async function handleSignup (event: any): Promise<void> {
     try {
-      const response = await UserApi.createNewUser({ username, password, email })
+      event.preventDefault()
+      const formData = new FormData(event.target)
+      const formObjectRequest: any = Object.fromEntries(formData)
+      const response = await UserApi.createNewUser(formObjectRequest)
 
       ToastUtils.createSuccessToast('Signup successful: ' + response.data.status)
     } catch (error: any) {
@@ -25,25 +24,25 @@ export function SignupScreen ({ setFormLoginStatus }: { setFormLoginStatus: any 
 
   return (
     <div>
-      <form >
+      <form onSubmit={(e) => { void handleSignup(e) }}>
         <div className="form-floating mb-3">
-          <input type="text" className="form-control" id="floatingInput" placeholder="name@example.com" value={username} onChange={(e) => { setUsername(e.target.value) }}
+          <input type="text" className="form-control" id="floatingInput" placeholder="name@example.com" name="username"
           />
           <label htmlFor="floatingInput">Username</label>
         </div>
         <div className="form-floating mb-3">
-          <input type="email" className="form-control" id="floatingEmail" placeholder="Password" value={email} onChange={(e) => { setEmail(e.target.value) }}
+          <input type="email" className="form-control" id="floatingEmail" placeholder="Email" name="email"
           />
           <label htmlFor="floatingEmail">Email</label>
         </div>
 
         <div className="form-floating mb-3">
-          <input type="password" className="form-control" id="floatingPassword" placeholder="Password" value={password} onChange={(e) => { setPassword(e.target.value) }}
+          <input type="password" className="form-control" id="floatingPassword" placeholder="Password" name="password"
           />
           <label htmlFor="floatingPassword">Password</label>
         </div>
 
-        <button type="button" className="w-100 btn btn-lg btn-success" onClick={() => { void handleSignup() }} >Sign Up</button>
+        <button type="submit" className="w-100 btn btn-lg btn-success" >Sign Up</button>
         <hr className="my-4" />
         <button type="button" className="mx-auto d-block w-80 btn btn-lg btn-primary" onClick={() => { switchToLogin() }} >Login Existing Account</button>
       </form>

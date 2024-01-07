@@ -23,6 +23,7 @@ class EntityController {
         }
       })
     } catch (errorObject: any) {
+      console.log(errorObject)
       const errorResponse = JSON.parse(serverErrorResponse)
       res.status(500).json({
         msg: 'Internal server error, contact API administrator'
@@ -44,6 +45,7 @@ class EntityController {
         })
       })
       .catch((errorObject: any) => {
+        console.log(errorObject)
         const errorResponse = JSON.parse(serverErrorResponse)
 
         if (errorObject.message === 'BadUsernameError') {
@@ -82,12 +84,10 @@ class EntityController {
   getAllEntities (req: Request, res: Response, next: NextFunction): void {
     const { params } = req.params
     const database = req.app.get('database')
-    console.log(req.get('Authorization'))
 
     entityServiceObject
       .getAllEntities(database, params)
       .then((getAllResult) => {
-        console.log(getAllResult)
         res.status(StatusCode.SuccessOK).json({
           status: true,
           data: getAllResult
@@ -119,6 +119,7 @@ class EntityController {
         })
       })
       .catch((errorObject: any) => {
+        console.log(errorObject)
         const errorResponse = JSON.parse(serverErrorResponse)
 
         if (errorObject.message === 'BadUsernameError') {
@@ -143,6 +144,7 @@ class EntityController {
         })
       })
       .catch((errorObject: any) => {
+        console.log(errorObject)
         const errorResponse = JSON.parse(serverErrorResponse)
 
         if (errorObject.message === 'BadUsernameError') {
