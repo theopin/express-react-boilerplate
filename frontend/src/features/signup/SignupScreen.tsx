@@ -7,7 +7,8 @@ export function SignupScreen ({ setFormLoginStatus }: { setFormLoginStatus: any 
     try {
       event.preventDefault()
       const formData = new FormData(event.target)
-      const response = await UserApi.createNewUser(formData)
+      const formObjectRequest: any = Object.fromEntries(formData)
+      const response = await UserApi.createNewUser(formObjectRequest)
 
       ToastUtils.createSuccessToast('Signup successful: ' + response.data.status)
     } catch (error: any) {

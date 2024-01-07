@@ -8,12 +8,14 @@ export function LoginScreen ({ setFormLoginStatus }: { setFormLoginStatus: any }
 
   async function handleLogin (event: any): Promise<void> {
     try {
-      event.preventDefault()
       const formData = new FormData(event.target)
-      const response = await AuthApi.authenticateUser(formData)
+      const formObjectRequest: any = Object.fromEntries(formData)
+      const response = await AuthApi.authenticateUser(formObjectRequest)
 
       localStorage.setItem('refreshToken', response.data.data.refreshToken)
       localStorage.setItem('accessToken', response.data.data.accessToken)
+
+      ToastUtils.createSuccessToast('Login Successful!')
 
       navigate('/dashboard')
     } catch (error: any) {
