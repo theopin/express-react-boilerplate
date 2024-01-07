@@ -49,11 +49,11 @@ export function MainRouter (): JSX.Element {
       <ToastContainer />
       <Router>
         <Routes>
-          <Route path="/error" element={<ErrorScreen /> } />
-          <Route path='/dashboard' element={isRefreshTokenValid() ? <Dashboard /> : <Navigate to="/welcome" />} />
-          <Route path="/products/new" element={<CreateProduct /> } />
-          <Route path="/products/:objectId" element={<UpdateProduct /> } />
-          <Route path='/products' element={isRefreshTokenValid() ? <ProductDetails /> : <Navigate to="/welcome" />} />
+          <Route path="/error" element={<Dashboard interiorData={<ErrorScreen/>}/> } />
+          <Route path='/dashboard' element={isRefreshTokenValid() ? <Dashboard interiorData={<div></div>}/> : <Navigate to="/welcome" />} />
+          <Route path="/products/new" element={ <Dashboard interiorData={<CreateProduct />}/> } />
+          <Route path="/products/:objectId" element={<Dashboard interiorData={<UpdateProduct />}/> } />
+          <Route path='/products' element={isRefreshTokenValid() ? <Dashboard interiorData={<ProductDetails />} /> : <Navigate to="/welcome" />} />
           <Route path='/welcome' element={isRefreshTokenValid() ? <Navigate to="/dashboard" /> : <WelcomeScreen />}/>
           <Route path='/' element={<Navigate to={isRefreshTokenValid() ? '/dashboard' : '/welcome'} />} />
           <Route path="*" element={<ErrorScreen />} />

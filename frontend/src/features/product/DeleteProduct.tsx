@@ -14,7 +14,8 @@ export function DeleteProduct ({ objectId, objectName }: { objectId: any, object
       ToastUtils.createSuccessToast(`Deleted Product ${objectName} (${objectId}) - ${response.data.status}`)
       console.log(navigate)
       handleClose()
-      navigate('/dashboard')
+      navigate('/products')
+      window.location.reload()
     } catch (error: any) {
       ToastUtils.createErrorToast('Error deleting object: ' + error.message)
       // Handle error as needed
