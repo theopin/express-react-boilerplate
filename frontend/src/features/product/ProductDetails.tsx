@@ -78,7 +78,7 @@ export function ProductDetails (): JSX.Element {
             productDetails.map((item: Product, index: number) => {
               return (
                 <tr key={'ProductView ' + index} id={'ProductView ' + index}>
-                  <td>{index}</td>
+                  <td>{index + 1}</td>
                   <td>{item.name}</td>
                   <td>{item.quantity}</td>
                   <td>
