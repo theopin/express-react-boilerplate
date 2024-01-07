@@ -9,9 +9,8 @@ export function UpdateProduct (): JSX.Element {
     event.preventDefault()
 
     const formData = new FormData(event.target)
-
-    const objectId: any = formData.get('_id')
     const formObjectRequest: any = Object.fromEntries(formData)
+    const objectId: any = formData.get('_id')
 
     console.log(objectId)
     console.log(formObjectRequest)
