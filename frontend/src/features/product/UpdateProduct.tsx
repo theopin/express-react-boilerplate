@@ -19,6 +19,7 @@ export function UpdateProduct (): JSX.Element {
       // Handle errors here
       const errorMessage = error.message !== undefined ? error.message : 'Failed to fetch product data'
       ToastUtils.createErrorToast(errorMessage)
+      navigate('/error')
     }
   }
 

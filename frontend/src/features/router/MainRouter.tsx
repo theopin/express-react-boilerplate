@@ -8,6 +8,7 @@ import { Dashboard } from '../dashboard/Dashboard'
 import { ProductDetails } from '../product/ProductDetails'
 import { UpdateProduct } from '../product/UpdateProduct'
 import { CreateProduct } from '../product/CreateProduct'
+import { ErrorScreen } from '../error/ErrorScreen'
 
 export function MainRouter (): JSX.Element {
   const isRefreshTokenValid = (): boolean => {
@@ -48,12 +49,14 @@ export function MainRouter (): JSX.Element {
       <ToastContainer />
       <Router>
         <Routes>
+          <Route path="/error" element={<ErrorScreen /> } />
           <Route path='/dashboard' element={isRefreshTokenValid() ? <Dashboard /> : <Navigate to="/welcome" />} />
           <Route path="/products/new" element={<CreateProduct /> } />
           <Route path="/products/:objectId" element={<UpdateProduct /> } />
           <Route path='/products' element={isRefreshTokenValid() ? <ProductDetails /> : <Navigate to="/welcome" />} />
           <Route path='/welcome' element={isRefreshTokenValid() ? <Navigate to="/dashboard" /> : <WelcomeScreen />}/>
           <Route path='/' element={<Navigate to={isRefreshTokenValid() ? '/dashboard' : '/welcome'} />} />
+          <Route path="*" element={<ErrorScreen />} />
         </Routes>
       </Router>
     </div>
