@@ -1,7 +1,7 @@
 import React from 'react'
 import { ProductApi } from '../../api/product/ProductApi'
 import { ToastUtils } from '../../components/toasts/utils/ToastUtils'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export function CreateProduct (): JSX.Element {
   const navigate = useNavigate()
@@ -25,16 +25,14 @@ export function CreateProduct (): JSX.Element {
   return (
         <div>
             <form className="row g-3" onSubmit={(e) => { void handleCreateNewProduct(e) }}>
-                <div className='row d-flex justify-content-evenly'>
-                    <div className="col-md-4">
-                        <div className='fw-bold'>Create New Product</div>
-                    </div>
+                <div className="d-flex justify-content-center">
+                    <div className='fw-bold'>Create New Product</div>
                 </div>
 
                 <div className='row g-3 d-flex justify-content-evenly'>
                     <div className="col-md-4">
                         <label htmlFor="name" className="form-label">Product Name</label>
-                        <input type="text" className="form-control" name="name" value="Mark" required />
+                        <input type="text" className="form-control" name="name" required />
                     </div>
                     <div className='col-md-4'>
                     <label htmlFor="exampleDataList" className="form-label">Datalist example</label>
@@ -85,7 +83,9 @@ export function CreateProduct (): JSX.Element {
 
                 <div className='row g-3 d-flex justify-content-evenly'>
                         <div className="col-md-2">
-                        <button className="btn btn-danger" >Cancel Submission</button>
+                            <Link to={'/products'}>
+                                <button type="button" className="btn btn-danger" >Cancel Submission</button>
+                            </Link>
                         </div>
                         <div className="col-md-2">
                             <button className="btn btn-success" type="submit">Create Product</button>
